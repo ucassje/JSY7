@@ -21,8 +21,8 @@ import lmfit
 Nv=81 #velocity step number
 i_solar_r=5 #10
 f_solar_r=20 #30
-path_home="/Users/user/Desktop/JSY5/"
-path_lab="/disk/plasma4/syj2/Code/JSY5/JSY5/"
+path_home="/Users/user/Desktop/JSY7/"
+path_lab="/disk/plasma4/syj2/Code/JSY7/"
 # path_current=path_home
 path_current=path_lab
 def n_0(r):
