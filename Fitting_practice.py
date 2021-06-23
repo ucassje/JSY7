@@ -149,7 +149,7 @@ for r in range(Nr):
     print(r)
     if r==0:
             p_c = lmfit.Parameters()
-            p_c.add_many(('nc', 1,True,0.8,1), ('Tc_pal', 10*10**5,True,1*10**5,12*10**5), ('Tc_per', 10*10**5,True,1*10**5,12*10**5), ('Uc',0,True,-1.5,0))
+            p_c.add_many(('nc', 1,True,0.8,1), ('Tc_pal', 10*10**5,True,1*10**5,10*10**5), ('Tc_per', 10*10**5,True,1*10**5,10*10**5), ('Uc',0,True,-1.5,0))
     else:                          
             p_c = lmfit.Parameters()
             p_c.add_many(('nc', nc[r-1],True,0.8,1), ('Tc_pal', Tc_pal[r-1],True,1*10**5,10*10**5), ('Tc_per', Tc_per[r-1],True,1*10**5,10*10**5), ('Uc',Uc[r-1],True,-1.5,0))
@@ -183,10 +183,10 @@ for r in range(Nr):
 
     if r==0:
             p_s = lmfit.Parameters()
-            p_s.add_many(('ns', 0,True,0,0.2), ('Ts_pal', 10*10**5,True,1*10**5,20*10**5), ('Ts_per', 10*10**5,True,1*10**5,20*10**5),('Us',0,True,0,0.5))
+            p_s.add_many(('ns', 0,True,0,0.2), ('Ts_pal', 10*10**5,True,1*10**5,10*10**5), ('Ts_per', 10*10**5,True,1*10**5,10*10**5),('Us',0,True,0,0.5))
     else:                          
             p_s = lmfit.Parameters()
-            p_s.add_many(('ns', ns[r-1],True,0,0.2), ('Ts_pal', Ts_pal[r-1],True,1*10**5,30*10**5), ('Ts_per', Ts_per[r-1],True,1*10**5,20*10**5),('Us',Us[r-1],True,0,17))
+            p_s.add_many(('ns', ns[r-1],True,0,0.2), ('Ts_pal', Ts_pal[r-1],True,1*10**5,10*10**5), ('Ts_per', Ts_per[r-1],True,1*10**5,10*10**5),('Us',Us[r-1],True,0,17))
 
 #Nv//2=40
     def residual_s(p_s):
