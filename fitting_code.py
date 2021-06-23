@@ -130,6 +130,7 @@ kappah=np.zeros(shape = (Nr))
 v_Ae=np.zeros(shape = (Nr))
 beta_c=np.zeros(shape = (Nr))
 beta_s=np.zeros(shape = (Nr))
+beta_h=np.zeros(shape = (Nr))
 
 f_1 = np.load('data_next.npy')
 Density=np.zeros(shape = (Nr))
@@ -319,10 +320,13 @@ for r in range(Nr):
 
 np.save('data_nc.npy', nc)         
 np.save('data_ns.npy', ns)
+np.save('data_nh.npy', ns)
 np.save('data_Tc_pal.npy', Tc_pal)
 np.save('data_Tc_per.npy', Tc_per)
 np.save('data_Ts_pal.npy', Ts_pal)
 np.save('data_Ts_per.npy', Ts_per)
+np.save('data_Th_pal.npy', Ts_pal)
+np.save('data_Th_per.npy', Ts_per)
 np.save('data_Uc.npy', Uc)
 np.save('data_Us.npy', Us)
 #np.save('data_kappac.npy', kappac)
@@ -340,6 +344,7 @@ ax.set_xlabel(r'$r/r_s$', fontsize=28)
 ax.set_ylabel(r'$Relative \ Density$', fontsize=28)
 ax.plot(z,nc,linewidth=4.0, color='b',label=r'$n_c/n_e$');
 ax.plot(z,ns,linewidth=4.0, color='r',label=r'$n_s/n_e$');
+ax.plot(z,nh,linewidth=4.0, color='g',label=r'$n_h/n_e$');
 plt.legend(loc='upper right')
 plt.savefig(f'{path_current}fitting/density.png')
 plt.clf()
@@ -359,6 +364,8 @@ ax.plot(z,Tc_pal,linewidth=4.0, color='b',label=r'$Tc_{pal}$');
 ax.plot(z,Tc_per,linewidth=4.0, color='b',linestyle='dotted',label=r'$Tc_{per}$');
 ax.plot(z,Ts_pal,linewidth=4.0, color='r',label=r'$Ts_{pal}$');
 ax.plot(z,Ts_per,linewidth=4.0, color='r',linestyle='dotted',label=r'$Ts_{per}$');
+ax.plot(z,Th_pal,linewidth=4.0, color='g',label=r'$Th_{pal}$');
+ax.plot(z,Th_per,linewidth=4.0, color='g',linestyle='dotted',label=r'$Th_{per}$');
 ax.plot(z,max(Tc_pal)*(z[0]/z)**0.8,linewidth=3.0, color='k',linestyle='--',label=r'$1/r^{0.8} \ Profile$');
 plt.legend(loc='upper right')
 plt.savefig(f'{path_current}fitting/temperature.png')
@@ -412,6 +419,7 @@ ax.set_xlabel(r'$r/r_s$', fontsize=28)
 ax.set_ylabel(r'$Beta \ Value$', fontsize=28)
 ax.plot(z,beta_c,linewidth=4.0, color='b',label=r'$\beta_c$');
 ax.plot(z,beta_s,linewidth=4.0, color='r',label=r'$\beta_s$');
+ax.plot(z,beta_h,linewidth=4.0, color='g',label=r'$\beta_h$');
 plt.legend(loc='upper right')
 plt.savefig(f'{path_current}fitting/beta.png')
 plt.clf()
