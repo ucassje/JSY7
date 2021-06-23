@@ -18,7 +18,6 @@ from lmfit import Parameters, fit_report, minimize
 #from lmfit import Model
 import lmfit
 Nv=81  #velocity step number
-Nv//2=
 i_solar_r=5 #10
 f_solar_r=20 #30
 path_home="/Users/user/Desktop/JSY7/"
