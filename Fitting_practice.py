@@ -194,7 +194,7 @@ for r in range(Nr):
         for j in range(Nv):
             for i in range(Nv//2+1):
                     f_11_s[j*(Nv//2+1)+i]=f_1[j*Nv+i+Nv//2,r]
-        
+        maxi=np.max(f_11_s)
         DataChosen = np.where((f_11_s/maxi)> 10**(-4));
         return np.log10(fitting_s[DataChosen])-np.log10(f_11_s[DataChosen])
 
@@ -300,12 +300,13 @@ for r in range(Nr):
 
 
 
-
+    solu2_0=np.zeros(shape = (Nv))
     solu2=np.zeros(shape = (Nv))
     solu2_c=np.zeros(shape = (Nv))
     solu2_s=np.zeros(shape = (Nv))
     #solu2_h=np.zeros(shape = (Nv))
-    
+    for i in range(Nv):
+        solu2_0[i]=np.log10(f_11[40*Nv+i]/fitting_max)
     for i in range(Nv):
         solu2[i]=np.log10(fitting[40*Nv+i]/fitting_max)
     for i in range(Nv):
