@@ -154,7 +154,12 @@ for r in range(Nr):
             p_c = lmfit.Parameters()
             p_c.add_many(('nc', nc[r-1],True,0.8,1), ('Tc_pal', Tc_pal[r-1],True,1*10**5,10*10**5), ('Tc_per', Tc_per[r-1],True,1*10**5,10*10**5), ('Uc',Uc[r-1],True,-1.5,0))
 
-    
+    f_11=np.zeros(shape = (Nv*(Nv), 1))#measured(calculated) VDF
+    for j in range(Nv):
+        for i in range((Nv)):
+                f_11[j*(Nv)+i]=f_1[j*Nv+i,r]
+
+    maxi=np.max(f_11)    
     
     def residual_c(p_c):
         v=p_c.valuesdict()
@@ -165,16 +170,16 @@ for r in range(Nr):
         fit_maxi=np.max(fitting_c)
 
 
-        f_11=np.zeros(shape = (Nv*(Nv//2+1), 1))#measured(calculated) VDF
+        f_11_c=np.zeros(shape = (Nv*(Nv//2+1), 1))#measured(calculated) VDF
         for j in range(Nv):
             for i in range((Nv//2+1)):
-                    f_11[j*(Nv//2+1)+i]=f_1[j*Nv+i,r]
+                    f_11_c[j*(Nv//2+1)+i]=f_1[j*Nv+i,r]
 
-        maxi=np.max(f_11)
+        maxi=np.max(f_11_c)
         
         
-        DataChosen = np.where((f_11/maxi)> 10**(-4));
-        return np.log10(fitting_c[DataChosen])-np.log10(f_11[DataChosen]) #np.log10(fitting/fit_maxi)-np.log10(f_11/maxi) 
+        DataChosen = np.where((f_11_c/maxi)> 10**(-4));
+        return np.log10(fitting_c[DataChosen])-np.log10(f_11_c[DataChosen]) #np.log10(fitting/fit_maxi)-np.log10(f_11/maxi) 
 
     if r==0:
             p_s = lmfit.Parameters()
