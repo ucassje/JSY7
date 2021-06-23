@@ -154,21 +154,23 @@ for r in range(Nr):
             p_c = lmfit.Parameters()
             p_c.add_many(('nc', nc[r-1],True,0.8,1), ('Tc_pal', Tc_pal[r-1],True,1*10**5,10*10**5), ('Tc_per', Tc_per[r-1],True,1*10**5,10*10**5), ('Uc',Uc[r-1],True,-1.5,0))
 
-    f_11=np.zeros(shape = (Nv**2, 1))#measured(calculated) VDF
-    for j in range(Nv):
-            for i in range(Nv):
-                    f_11[j*Nv+i]=f_1[j*Nv+i,r]
-
-    maxi=np.max(f_11)
+    
     
     def residual_c(p_c):
         v=p_c.valuesdict()
-        fitting_c=np.zeros(shape = (Nv**2, 1))
+        fitting_c=np.zeros(shape = (Nv*(Nv//2+1), 1))
         for j in range(Nv):
-            for i in range(Nv):
-                fitting_c[j*Nv+i]=(v['nc'])*(r_s**3)*Density[r]*(np.pi**(3/2)*v_th_function(v['Tc_pal'])*v_th_function(v['Tc_per'])**2)**(-1)*np.exp(-(per_v[j]/v_th_function(v['Tc_per']))**2)*np.exp(-((pal_v[i]-v['Uc'])/v_th_function(v['Tc_pal']))**2)     #+(v['nh'])*(r_s**3)*Density[r]*(v_th_function(v['Th_pal'])*v_th_function(v['Th_per'])**2)**(-1)*(2/(np.pi*(2*v['kappah']-3)))**1.5*(gamma(v['kappah']+1)/gamma(v['kappah']-0.5))*(1.+(2/(2*v['kappah']-3))*(((per_v[j])/v_th_function(v['Th_per']))**2)+(2/(2*v['kappah']-3))*(((pal_v[i]-v['Uc'])/v_th_function(v['Th_pal']))**2))**(-v['kappah']-1.)      #(v['nc'])*(r_s**3)*Density[r]*(v_th_function(v['Tc_pal'])*v_th_function(v['Tc_per'])**2)**(-1)*(2/(np.pi*(2*30-3)))**1.5*(gamma(30+1)/gamma(30-0.5))*(1.+(2/(2*30-3))*(((per_v[j])/v_th_function(v['Tc_per']))**2)+(2/(2*30-3))*(((pal_v[i]-v['Uc'])/v_th_function(v['Tc_pal']))**2))**(-30-1.)+(v['ns'])*(r_s**3)*Density[r]*(v_th_function(v['Ts_pal'])*v_th_function(v['Ts_per'])**2)**(-1)*(2/(np.pi*(2*30-3)))**1.5*(gamma(30+1)/gamma(30-0.5))*(1.+(2/(2*30-3))*(((per_v[j])/v_th_function(v['Ts_per']))**2)+(2/(2*30-3))*(((pal_v[i]-v['Us'])/v_th_function(v['Ts_pal']))**2))**(-30-1.)
+            for i in range((Nv//2+1)):
+                fitting_c[j*(Nv//2+1)+i]=(v['nc'])*(r_s**3)*Density[r]*(np.pi**(3/2)*v_th_function(v['Tc_pal'])*v_th_function(v['Tc_per'])**2)**(-1)*np.exp(-(per_v[j]/v_th_function(v['Tc_per']))**2)*np.exp(-((pal_v[i]-v['Uc'])/v_th_function(v['Tc_pal']))**2)     #+(v['nh'])*(r_s**3)*Density[r]*(v_th_function(v['Th_pal'])*v_th_function(v['Th_per'])**2)**(-1)*(2/(np.pi*(2*v['kappah']-3)))**1.5*(gamma(v['kappah']+1)/gamma(v['kappah']-0.5))*(1.+(2/(2*v['kappah']-3))*(((per_v[j])/v_th_function(v['Th_per']))**2)+(2/(2*v['kappah']-3))*(((pal_v[i]-v['Uc'])/v_th_function(v['Th_pal']))**2))**(-v['kappah']-1.)      #(v['nc'])*(r_s**3)*Density[r]*(v_th_function(v['Tc_pal'])*v_th_function(v['Tc_per'])**2)**(-1)*(2/(np.pi*(2*30-3)))**1.5*(gamma(30+1)/gamma(30-0.5))*(1.+(2/(2*30-3))*(((per_v[j])/v_th_function(v['Tc_per']))**2)+(2/(2*30-3))*(((pal_v[i]-v['Uc'])/v_th_function(v['Tc_pal']))**2))**(-30-1.)+(v['ns'])*(r_s**3)*Density[r]*(v_th_function(v['Ts_pal'])*v_th_function(v['Ts_per'])**2)**(-1)*(2/(np.pi*(2*30-3)))**1.5*(gamma(30+1)/gamma(30-0.5))*(1.+(2/(2*30-3))*(((per_v[j])/v_th_function(v['Ts_per']))**2)+(2/(2*30-3))*(((pal_v[i]-v['Us'])/v_th_function(v['Ts_pal']))**2))**(-30-1.)
         fit_maxi=np.max(fitting_c)
 
+
+        f_11=np.zeros(shape = (Nv*(Nv//2+1), 1))#measured(calculated) VDF
+        for j in range(Nv):
+            for i in range((Nv//2+1)):
+                    f_11[j*(Nv//2+1)+i]=f_1[j*Nv+i,r]
+
+        maxi=np.max(f_11)
         
         
         DataChosen = np.where((f_11/maxi)> 10**(-4));
