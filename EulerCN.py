@@ -405,7 +405,7 @@ def H_perp(a,b,x):
 
 
 def rect_v(x):
-	return 1#0 if abs(x)>=abs(pal_v[0]) else 1
+	return 0 if abs(x)>=abs(pal_v[0]) else 1
 
 def sin(x):
         return (1/(1+(U_solar(x)/Omega*(1/x))**2)**0.5)
@@ -623,8 +623,8 @@ def Matrix_QQ(R):
     return AA
 
 
-f_1 = np.load('data_next.npy')
-updatetime=1
+#f_1 = np.load('data_next.npy')
+updatetime=7
 timestep=100 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
