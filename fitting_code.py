@@ -165,7 +165,7 @@ for r in range(Nr):
                 fitting[j*Nv+i]=(v['nc'])*(r_s**3)*Density[r]*(np.pi**(3/2)*v_th_function(v['Tc_pal'])*v_th_function(v['Tc_per'])**2)**(-1)*np.exp(-(per_v[j]/v_th_function(v['Tc_per']))**2)*np.exp(-((pal_v[i]-v['Uc'])/v_th_function(v['Tc_pal']))**2)+(v['ns'])*(r_s**3)*Density[r]*(np.pi**(3/2)*v_th_function(v['Ts_pal'])*v_th_function(v['Ts_per'])**2)**(-1)*np.exp(-(per_v[j]/v_th_function(v['Ts_per']))**2)*np.exp(-((pal_v[i]-v['Us'])/v_th_function(v['Ts_pal']))**2)      #(v['nc'])*(r_s**3)*Density[r]*(v_th_function(v['Tc_pal'])*v_th_function(v['Tc_per'])**2)**(-1)*(2/(np.pi*(2*30-3)))**1.5*(gamma(30+1)/gamma(30-0.5))*(1.+(2/(2*30-3))*(((per_v[j])/v_th_function(v['Tc_per']))**2)+(2/(2*30-3))*(((pal_v[i]-v['Uc'])/v_th_function(v['Tc_pal']))**2))**(-30-1.)+(v['ns'])*(r_s**3)*Density[r]*(v_th_function(v['Ts_pal'])*v_th_function(v['Ts_per'])**2)**(-1)*(2/(np.pi*(2*30-3)))**1.5*(gamma(30+1)/gamma(30-0.5))*(1.+(2/(2*30-3))*(((per_v[j])/v_th_function(v['Ts_per']))**2)+(2/(2*30-3))*(((pal_v[i]-v['Us'])/v_th_function(v['Ts_pal']))**2))**(-30-1.)
         fit_maxi=np.max(fitting)
         
-        DataChosen = np.where((f_11/maxi)> 10**(-2));
+        DataChosen = np.where((f_11/maxi)> 10**(-4));
         return np.log10(fitting[DataChosen])-np.log10(f_11[DataChosen]) #np.log10(fitting/fit_maxi)-np.log10(f_11/maxi) 
 
     mi = lmfit.minimize(residual, p, method='nelder', options={'maxiter' : 1900}, nan_policy='omit')
