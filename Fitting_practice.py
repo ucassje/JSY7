@@ -206,7 +206,6 @@ for r in range(Nr):
         return np.log10(fitting_s[DataChosen])-np.log10(f_11_s[DataChosen])
 
 
-#+(v['ns'])*(r_s**3)*Density[r]*(np.pi**(3/2)*v_th_function(v['Ts_pal'])*v_th_function(v['Ts_per'])**2)**(-1)*np.exp(-(per_v[j]/v_th_function(v['Ts_per']))**2)*np.exp(-((pal_v[i]-v['Us'])/v_th_function(v['Ts_pal']))**2)
 
     mi = lmfit.minimize(residual_c, p_c, method='nelder', options={'maxiter' : 1900}, nan_policy='omit')
     #lmfit.printfuncs.report_fit(mi.params, min_correl=0.5)
