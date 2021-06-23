@@ -253,7 +253,7 @@ for r in range(Nr):
     
     if r==0:
         fitting_max=np.max(fitting)
-        original_max=np.max(f_11)
+
 
     solu1=np.zeros(shape = (Nv, Nv))
     for j in range(Nv):
