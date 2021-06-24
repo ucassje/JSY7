@@ -149,10 +149,10 @@ for r in range(Nr):
     print(r)
     if r==0:
             p = lmfit.Parameters()
-            p.add_many(('nc', 1,True,0.8,1), ('Tc_pal', 10*10**5,True,1*10**5,10*10**5), ('Tc_per', 10*10**5,True,1*10**5,10*10**5), ('Ts_pal', 10*10**5,True,1*10**5,20*10**5), ('Ts_per', 10*10**5,True,1*10**5,20*10**5), ('Uc',0,True,-1.5,0),('Us',0,True,0,0.5))
+            p.add_many(('nc', 0.8,True,0.8,1), ('Tc_pal', 10*10**5,True,1*10**5,10*10**5), ('Tc_per', 10*10**5,True,1*10**5,10*10**5), ('Ts_pal', 17*10**5,True,1*10**5,20*10**5), ('Ts_per', 17*10**5,True,1*10**5,20*10**5), ('Uc',0,True,-1.5,0),('Us',0,True,0,0.5))
     else:                          
             p = lmfit.Parameters()
-            p.add_many(('nc', nc[r-1],True,0.8,1), ('Tc_pal', Tc_pal[r-1],True,1*10**5,10*10**5), ('Tc_per', Tc_per[r-1],True,1*10**5,10*10**5), ('Ts_pal', Ts_pal[r-1],True,1*10**5,20*10**5), ('Ts_per', Ts_per[r-1],True,1*10**5,20*10**5), ('Uc',Uc[r-1],True,-1.5,0),('Us',Us[r-1],True,0,17))
+            p.add_many(('nc', nc[r-1],True,0.8,1), ('Tc_pal', Tc_pal[r-1],True,1*10**5,10*10**5), ('Tc_per', Tc_per[r-1],True,1*10**5,10*10**5), ('Ts_pal', Ts_pal[r-1],True,1*10**5,20*10**5), ('Ts_per', Ts_per[r-1],True,1*10**5,20*10**5), ('Uc',Uc[r-1],True,-1.5,-0.05),('Us',Us[r-1],True,0,17))
 
     f_11=np.zeros(shape = (Nv**2, 1))   #measured(calculated) VDF
     for j in range(Nv):
