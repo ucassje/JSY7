@@ -133,16 +133,16 @@ beta_s=np.zeros(shape = (Nr))
 #beta_h=np.zeros(shape = (Nr))
 
 f_1 = np.load('data_next.npy')
+
 Density=np.zeros(shape = (Nr))
 for r in range(Nr):
-   tempDensity=0
-   for j in range(Nv):
-      for i in range(Nv):
-              if per_v[j]<0:
-                      tempDensity=tempDensity
-              else:
-                      tempDensity=tempDensity+2*np.pi*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
-   Density[r]=tempDensity/(r_s**3)
+    f_11=np.zeros(shape = (Nv, 1))
+    for i in range(Nv):
+        f_11[i]=f_1[40*Nv+i,r]
+    tempDensity=0
+    for i in range(Nv):
+            tempDensity=tempDensity+f_11[i]*(pal_v[1]-pal_v[0])
+    Density[r]=tempDensity/(r_s**3)
 
 
 for r in range(Nr):
@@ -168,7 +168,6 @@ for r in range(Nr):
         fit_maxi=np.max(fitting)
         
         DataChosen = np.where((f_11/maxi)> 10**(-8));
-        DataChosen2 = np.where((fitting/fit_maxi)> 10**(-8));
         return np.log10(fitting[DataChosen2])-np.log10(f_11[DataChosen]) #np.log10(fitting/fit_maxi)-np.log10(f_11/maxi) 
 
     mi = lmfit.minimize(residual, p, method='nelder', options={'maxiter' : 1900}, nan_policy='omit')
