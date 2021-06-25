@@ -211,7 +211,8 @@ for r in range(Nr):
     #    for i in range(Nv):
     #        fitting_h[j*Nv+i]=nh[r]*(r_s**3)*Density[r]*(v_th_function(Th_pal[r])*v_th_function(Th_per[r])**2)**(-1)*(2/(np.pi*(2*kappah[r]-3)))**1.5*(gamma(kappah[r]+1)/gamma(kappah[r]-0.5))*(1.+(2/(2*kappah[r]-3))*(((per_v[j])/v_th_function(Th_per[r]))**2)+(2/(2*kappah[r]-3))*(((pal_v[i]-Uc[r])/v_th_function(Th_pal[r]))**2))**(-kappah[r]-1.) #(ns[r])*(r_s**3)*Density[r]*(v_th_function(Ts_pal[r])*v_th_function(Ts_per[r])**2)**(-1)*(2/(np.pi*(2*30-3)))**1.5*(gamma(30+1)/gamma(30-0.5))*(1.+(2/(2*30-3))*(((per_v[j])/v_th_function(Ts_per[r]))**2)+(2/(2*30-3))*(((pal_v[i]-Us[r])/v_th_function(Ts_pal[r]))**2))**(-30-1.)
 
-    
+    if r==0:
+        fitting_max=np.max(fitting)
 
 
     solu2=np.zeros(shape = (Nv))
