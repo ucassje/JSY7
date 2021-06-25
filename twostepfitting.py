@@ -170,7 +170,7 @@ for r in range(Nr):
         DataChosen = np.where((f_11/maxi)> 10**(-8));
         return np.log10(fitting[DataChosen])-np.log10(f_11[DataChosen]) #np.log10(fitting/fit_maxi)-np.log10(f_11/maxi) 
 
-    mi = lmfit.minimize(residual, p, method='nelder', options={'maxiter' : 1900}, nan_policy='omit')
+    mi = lmfit.minimize(residual, p, method='nelder', options={'maxiter' : 2500}, nan_policy='omit')
     #lmfit.printfuncs.report_fit(mi.params, min_correl=0.5)
     print(fit_report(mi))
     zx =  mi.params
