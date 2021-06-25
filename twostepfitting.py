@@ -218,8 +218,10 @@ for r in range(Nr):
     solu2=np.zeros(shape = (Nv))
     solu2_c=np.zeros(shape = (Nv))
     solu2_s=np.zeros(shape = (Nv))
+    solu4=np.zeros(shape = (Nv))
     #solu2_h=np.zeros(shape = (Nv))
-    
+    for i in range(Nv):
+        solu4[i]=np.log10(f_1[40*Nv+i,r]/fitting_max)
     for i in range(Nv):
         solu2[i]=np.log10(fitting[i]/fitting_max)
     for i in range(Nv):
@@ -230,6 +232,7 @@ for r in range(Nr):
     #    solu2_h[i]=np.log10(fitting_h[40*Nv+i]/fitting_max)
     fig = plt.figure()
     fig.set_dpi(500)
+    plt.plot(pal_v,solu4,color='k',linestyle='dotted');
     plt.plot(pal_v,solu2_c,color='b');
     plt.plot(pal_v,solu2_s,color='r');
     #plt.plot(pal_v,solu2_h,color='g');
