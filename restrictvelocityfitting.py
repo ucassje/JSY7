@@ -135,6 +135,16 @@ beta_s=np.zeros(shape = (Nr))
 h=0
 f_1 = np.load('data_next.npy')
 
+Density=np.zeros(shape = (Nr))
+for r in range(Nr):
+   tempDensity=0
+   for j in range(Nv):
+      for i in range(Nv):
+              if per_v[j]<0:
+                      tempDensity=tempDensity
+              else:
+                      tempDensity=tempDensity+2*np.pi*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+   Density[r]=tempDensity/(r_s**3)
 
 for j in range(Nv):
         if per_v[j]>13:
