@@ -313,8 +313,10 @@ for r in range(Nr):
     solu2=np.zeros(shape = (Nv))
     solu2_c=np.zeros(shape = (Nv))
     solu2_s=np.zeros(shape = (Nv))
+    solu4=np.zeros(shape = (Nv))
     #solu2_h=np.zeros(shape = (Nv))
-    
+    for i in range(Nv):
+        solu4[i]=np.log10(f_1[40*Nv+i,r]/fitting_max)
     for i in range(Nv):
         solu2[i]=np.log10(fitting[40*Nv+i]/fitting_max)
     for i in range(Nv):
