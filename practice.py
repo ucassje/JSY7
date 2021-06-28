@@ -519,7 +519,7 @@ def Matrix_alpha(R,M):
            if R==0:
               alpha[i,j] =-0*(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0
            elif R==Nr-1:
-              alpha[i,j] =-(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0
+              alpha[i,j] =-0*(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0
            else:
               alpha[i,j] =-(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0 #*rect((2.*(t[1]-t[0])/z[R])*f_1[M*Nv+i,R]/Mf[0]+Fz*0.5*(f_1[M*Nv+i,R+1]/Mf[0]-f_1[M*Nv+i,R-1]/Mf[0]))     return alpha
     return alpha
