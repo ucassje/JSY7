@@ -944,9 +944,9 @@ for p in range(updatetime):
                                             if i==0 and j==Nv-2:
                                                     f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i+1,r]*d_pal_ne[j,r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
                                             if i==Nv-1 and j==1:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]*d_pal_po[j,r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]**2/f_1[(j)*Nv+i-2,r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                                             if i==Nv-1 and j==Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]*d_pal_po[j,r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]**2/f_1[(j)*Nv+i-2,r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                                         
                                             if j==0 and i!=0 and i!=Nv-1 and i!=1 and i!=Nv-2:
                                                     f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i,r]*d_per_ne[i,r]#(4*f_1[(j+1)*Nv+i+1,r]+4*f_1[(j+1)*Nv+i-1,r]+4*f_1[(j+3)*Nv+i,r]-4*f_1[(j+2)*Nv+i,r]-4*f_1[(j+1)*Nv+i,r]-f_1[(j+2)*Nv+i+2,r]-f_1[(j+2)*Nv+i-2,r]-f_1[(j+4)*Nv+i,r])#2*f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i] #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i]/np.max(f_1)))                            #((per_v[j]-per_v[j+2])/(per_v[j+2]-per_v[j+1]))*(f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i])+f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i] 
