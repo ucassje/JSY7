@@ -623,6 +623,16 @@ def Matrix_QQ(R):
     return AA
 
 
+
+X2,Y2 = np.meshgrid(pal_v,per_v)
+
+solu1=np.zeros(shape = (Nv, Nv))
+solu2=np.zeros(shape = (Nv))
+solu3=np.zeros(shape = (Nv))
+solu4=np.zeros(shape = (Nv))
+cont_lev = np.linspace(-10,0,25)
+
+
 #f_1 = np.load('data_next.npy')
 updatetime=1
 timestep=250 #700
@@ -960,7 +970,36 @@ for p in range(updatetime):
                                                     f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i-1,r]*d_pal_po_per_po[r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                 f_1[:,:]=f_temp1[:,:]
                 f_1[:,0]=f_initial[:,0]
-        
+
+
+                for j in range(Nv):
+                        for i in range(Nv):
+                               if f_1[(j)*Nv+i,1]/np.amax(f_1)>1:
+                                       solu1[j,i]=0
+                               elif f_1[(j)*Nv+i,1]/np.amax(f_1)>10**(-10):
+                                       solu1[j,i]=np.log10(f_1[(j)*Nv+i,1]/np.amax(f_1))
+                               else:
+                                       solu1[j,i]=-10
+                fig = plt.figure()
+                fig.set_dpi(500)
+                plt.contourf(X2, Y2,solu1, cont_lev,cmap='Blues');
+                ax = plt.gca()
+                ax.spines['left'].set_position('center')
+                ax.spines['left'].set_smart_bounds(True)
+                ax.spines['bottom'].set_position('zero')
+                ax.spines['bottom'].set_smart_bounds(True)
+                ax.spines['right'].set_color('none')
+                ax.spines['top'].set_color('none')
+                ax.xaxis.set_ticks_position('bottom')
+                plt.axis('equal')
+                ax.xaxis.set_ticks_position('bottom')
+                ax.yaxis.set_ticks_position('left')
+                plt.rc('font', size=8)
+                plt.tick_params(labelsize=8)                  
+                plt.colorbar(label=r'$Log(F/F_{MAX})$')
+                plt.savefig(f'{path_current}r=1/{k}.png')
+                plt.clf()
+                plt.close()
         
                 f_next[:,:]=f_1[:,:]
                 norm=0
