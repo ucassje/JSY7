@@ -18,7 +18,7 @@ from lmfit import Parameters, fit_report, minimize
 #from lmfit import Model
 import lmfit
 
-Nv=31 #velocity step number
+Nv=81 #velocity step number
 i_solar_r=5 #10
 f_solar_r=20 #30
 path_home="/Users/user/Desktop/JSY7/"
@@ -37,19 +37,19 @@ q=1.6022*(10**(-19))
 Me=9.1094*(10**(-31))
 Mp=1.6726*(10**(-27))
 ratio=(Me/Mp)**0.5
-Mv=25*10**6/v_Ae_0  #5*10**7 #(2/3)*5*10**7 
+Mv=15*10**6/v_Ae_0  #5*10**7 #(2/3)*5*10**7 
 epsilon=8.8542*10**(-12)
 pal_v = np.linspace(-Mv, Mv, Nv)
 per_v = np.linspace(-Mv, Mv, Nv)
 delv=pal_v[1]-pal_v[0]
 
-Nr=30      #radial step number
+Nr=50      #radial step number
 r_s=696340000.
 z=np.linspace(i_solar_r, f_solar_r, Nr)
 delz=z[1]-z[0]
 
 Mt=3600*v_Ae_0/r_s
-Nt=3600/2
+Nt=3600
 t=np.linspace(0, Mt, Nt)
 delt=(t[1]-t[0])            #time step
 
@@ -423,7 +423,7 @@ def B(x):
         return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
 
 def dlnB(x):
-        return 0*(np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
+        return (np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
 
  
         
@@ -623,19 +623,9 @@ def Matrix_QQ(R):
     return AA
 
 
-
-X2,Y2 = np.meshgrid(pal_v,per_v)
-
-solu1=np.zeros(shape = (Nv, Nv))
-solu2=np.zeros(shape = (Nv))
-solu3=np.zeros(shape = (Nv))
-solu4=np.zeros(shape = (Nv))
-cont_lev = np.linspace(-10,0,25)
-
-
-#f_1 = np.load('data_next.npy')
+f_1 = np.load('data_next.npy')
 updatetime=1
-timestep=250 #700
+timestep=100 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
         print(p)
@@ -970,36 +960,7 @@ for p in range(updatetime):
                                                     f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i-1,r]*d_pal_po_per_po[r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                 f_1[:,:]=f_temp1[:,:]
                 f_1[:,0]=f_initial[:,0]
-
-
-                for j in range(Nv):
-                        for i in range(Nv):
-                               if f_1[(j)*Nv+i,1]/np.amax(f_1)>1:
-                                       solu1[j,i]=0
-                               elif f_1[(j)*Nv+i,1]/np.amax(f_1)>10**(-10):
-                                       solu1[j,i]=np.log10(f_1[(j)*Nv+i,1]/np.amax(f_1))
-                               else:
-                                       solu1[j,i]=-10
-                fig = plt.figure()
-                fig.set_dpi(500)
-                plt.contourf(X2, Y2,solu1, cont_lev,cmap='Blues');
-                ax = plt.gca()
-                ax.spines['left'].set_position('center')
-                ax.spines['left'].set_smart_bounds(True)
-                ax.spines['bottom'].set_position('zero')
-                ax.spines['bottom'].set_smart_bounds(True)
-                ax.spines['right'].set_color('none')
-                ax.spines['top'].set_color('none')
-                ax.xaxis.set_ticks_position('bottom')
-                plt.axis('equal')
-                ax.xaxis.set_ticks_position('bottom')
-                ax.yaxis.set_ticks_position('left')
-                plt.rc('font', size=8)
-                plt.tick_params(labelsize=8)                  
-                plt.colorbar(label=r'$Log(F/F_{MAX})$')
-                plt.savefig(f'{path_current}r=1/{k}.png')
-                plt.clf()
-                plt.close()
+        
         
                 f_next[:,:]=f_1[:,:]
                 norm=0
@@ -1068,7 +1029,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for i in range(Nv):
-        solu2[i]=np.log10(f_1[(15)*Nv+i,r]/np.amax(f_1))
+        solu2[i]=np.log10(f_1[(40)*Nv+i,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(pal_v,solu2,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
@@ -1093,7 +1054,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for j in range(Nv):
-        solu4[j]=np.log10(f_1[(j)*Nv+15,r]/np.amax(f_1))
+        solu4[j]=np.log10(f_1[(j)*Nv+40,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(per_v,solu4,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
