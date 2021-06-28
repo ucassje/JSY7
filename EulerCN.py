@@ -49,7 +49,7 @@ z=np.linspace(i_solar_r, f_solar_r, Nr)
 delz=z[1]-z[0]
 
 Mt=3600*v_Ae_0/r_s
-Nt=3600
+Nt=3600/2
 t=np.linspace(0, Mt, Nt)
 delt=(t[1]-t[0])            #time step
 
@@ -624,8 +624,8 @@ def Matrix_QQ(R):
 
 
 #f_1 = np.load('data_next.npy')
-updatetime=5
-timestep=100 #700
+updatetime=1
+timestep=250 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
         print(p)
