@@ -18,7 +18,7 @@ from lmfit import Parameters, fit_report, minimize
 #from lmfit import Model
 import lmfit
 
-Nv=81 #velocity step number
+Nv=31 #velocity step number
 i_solar_r=5 #10
 f_solar_r=20 #30
 path_home="/Users/user/Desktop/JSY7/"
@@ -43,7 +43,7 @@ pal_v = np.linspace(-Mv, Mv, Nv)
 per_v = np.linspace(-Mv, Mv, Nv)
 delv=pal_v[1]-pal_v[0]
 
-Nr=50      #radial step number
+Nr=20      #radial step number
 r_s=696340000.
 z=np.linspace(i_solar_r, f_solar_r, Nr)
 delz=z[1]-z[0]
@@ -627,8 +627,8 @@ def Matrix_QQ(R):
 
 
 #f_1 = np.load('data_next.npy')
-updatetime=10
-timestep=100 #700
+updatetime=1
+timestep=1000 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
         print(p)
@@ -1035,7 +1035,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for i in range(Nv):
-        solu2[i]=np.log10(f_1[(40)*Nv+i,r]/np.amax(f_1))
+        solu2[i]=np.log10(f_1[(15)*Nv+i,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(pal_v,solu2,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
@@ -1060,7 +1060,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for j in range(Nv):
-        solu4[j]=np.log10(f_1[(j)*Nv+40,r]/np.amax(f_1))
+        solu4[j]=np.log10(f_1[(j)*Nv+15,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(per_v,solu4,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
