@@ -423,7 +423,7 @@ def B(x):
         return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
 
 def dlnB(x):
-        return 0#(np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
+        return (np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
 
  
         
@@ -967,6 +967,17 @@ for p in range(updatetime):
                 f_1[:,:]=f_temp1[:,:]
                 f_1[:,0]=f_initial[:,0]
         
+
+                               
+                for r in range(Nr-1):
+                            for j in range(Nv):
+                                    for i in range(Nv):
+                                            if j!=Nv-1 and per_v[j]>0 and f_1[j*Nv+i,r]<f_1[(j+1)*Nv+i,r]:
+                                                    f_1[(j+1)*Nv+i,r]=f_1[j*Nv+i,r]**2/f_1[(j-1)*Nv+i,r]#2*f_temp4[(r)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)-f_temp4[(r-1)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[(r-1)*(Nv)*(Nv)+j*Nv+i]**(-1)*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)   
+                                            if j!=0 and per_v[j]<0 and f_1[j*Nv+i,r]<f_1[(j-1)*Nv+i,r]:
+                                                    f_1[(j-1)*Nv+i,r]=f_1[j*Nv+i,r]**2/f_1[(j+1)*Nv+i,r]     #0.5*(f_1[(r)*(Nv)*(Nv)+j*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)+f_1[(r+2)*(Nv)*(Nv)+j*Nv+i]*ratio_r[(r+1)*(Nv)*(Nv)+j*Nv+i])                                
+
+
         
                 f_next[:,:]=f_1[:,:]
                 norm=0
