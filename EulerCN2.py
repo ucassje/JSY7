@@ -944,7 +944,7 @@ for p in range(updatetime):
                             for j in range(Nv):
                                     for i in range(Nv):
                                             if i!=Nv-1 and i!=0 and j!=Nv-1 and j!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]+0.5*f_1[j*Nv+i-1,r+1]+0.5*f_1[(j+1)*Nv+i,r+1]+0.5*f_1[(j-1)*Nv+i,r+1])                             
+                                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1]))                             
                 f_1[:,:]=f_temp4[:,:]
                 f_1[:,0]=f_initial[:,0]
 
