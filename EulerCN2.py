@@ -49,7 +49,7 @@ z=np.linspace(i_solar_r, f_solar_r, Nr)
 delz=z[1]-z[0]
 
 Mt=3600*v_Ae_0/r_s
-Nt=1800
+Nt=3600
 t=np.linspace(0, Mt, Nt)
 delt=(t[1]-t[0])            #time step
 
@@ -944,7 +944,7 @@ for p in range(updatetime):
                             for j in range(Nv):
                                     for i in range(Nv):
                                             if i!=Nv-1 and i!=0 and j!=Nv-1 and j!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*ratio_pal[j*Nv+i,r+1]+0.5*f_1[j*Nv+i-1,r+1]*ratio_pal[j*Nv+(i-1),r+1]**(-1)+0.5*f_1[(j+1)*Nv+i,r+1]*ratio_per[j*Nv+i,r+1]+0.5*f_1[(j-1)*Nv+i,r+1]*ratio_per[(j-1)*Nv+(i),r+1]**(-1))                             
+                                                    f_temp4[j*Nv+i,r+1]=(f_1[(j+1)*Nv+i,r+1]*f_1[(j-1)*Nv+i,r+1]*f_1[(j)*Nv+i+1,r+1]*f_1[(j)*Nv+i-1,r+1])**(1/4) #(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*ratio_pal[j*Nv+i,r+1]+0.5*f_1[j*Nv+i-1,r+1]*ratio_pal[j*Nv+(i-1),r+1]**(-1)+0.5*f_1[(j+1)*Nv+i,r+1]*ratio_per[j*Nv+i,r+1]+0.5*f_1[(j-1)*Nv+i,r+1]*ratio_per[(j-1)*Nv+(i),r+1]**(-1))                             
                 f_1[:,:]=f_temp4[:,:]
                 f_1[:,0]=f_initial[:,0]
 
