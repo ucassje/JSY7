@@ -423,7 +423,7 @@ def B(x):
         return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
 
 def dlnB(x):
-        return 0#(np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
+        return (np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
 
  
         
@@ -506,7 +506,7 @@ def Matrix_alpha(R,M):
            elif R==Nr-1:
               alpha[i,j] =-0*(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0
            else:
-              alpha[i,j] =-(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0 #*rect((2.*(t[1]-t[0])/z[R])*f_1[M*Nv+i,R]/Mf[0]+Fz*0.5*(f_1[M*Nv+i,R+1]/Mf[0]-f_1[M*Nv+i,R-1]/Mf[0]))     return alpha
+              alpha[i,j] =-0*(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0 #*rect((2.*(t[1]-t[0])/z[R])*f_1[M*Nv+i,R]/Mf[0]+Fz*0.5*(f_1[M*Nv+i,R+1]/Mf[0]-f_1[M*Nv+i,R-1]/Mf[0]))     return alpha
     return alpha
 
 def Matrix_AA(R):
@@ -597,7 +597,7 @@ def Matrix_QQ(R):
     return AA
 
 
-#f_1 = np.load('data_next.npy')
+f_1 = np.load('data_next.npy')
 updatetime=1
 timestep=1000 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
