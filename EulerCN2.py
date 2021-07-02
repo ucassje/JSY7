@@ -179,6 +179,18 @@ for r in range(Nr-1):
                 for i in range(Nv):
                         ratio_r[j*Nv+i,r]=abs(f_1[j*Nv+i,r]/f_1[j*Nv+i,r+1])
 
+ratio_per=np.zeros(shape = (Nv**2, Nr))
+for r in range(Nr):
+        for j in range(Nv-1):
+                for i in range(Nv):
+                        ratio_per[j*Nv+i,r]=abs(f_1[j*Nv+i,r]/f_1[(j+1)*Nv+i,r])
+
+ratio_pal=np.zeros(shape = (Nv**2, Nr))
+for r in range(Nr):
+        for j in range(Nv):
+                for i in range(Nv-1):
+                        ratio_pal[j*Nv+i,r]=abs(f_1[j*Nv+i,r]/f_1[(j)*Nv+(i+1),r])
+
 
 d_pal_ne=np.zeros(shape = (Nv, Nr))
 for r in range(Nr):
@@ -932,7 +944,7 @@ for p in range(updatetime):
                             for j in range(Nv):
                                     for i in range(Nv):
                                             if i!=Nv-1 and i!=0 and j!=Nv-1 and j!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]+0.5*f_1[j*Nv+i-1,r+1]+0.5*f_1[(j+1)*Nv+i,r+1]+0.5*f_1[(j-1)*Nv+i,r+1])                             
+                                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*ratio_pal[j*Nv+i,r+1]+0.5*f_1[j*Nv+i-1,r+1]*ratio_pal[j*Nv+(i-1),r+1]**(-1)+0.5*f_1[(j+1)*Nv+i,r+1]*ratio_per[j*Nv+i,r+1]+0.5*f_1[(j-1)*Nv+i,r+1]*ratio_per[j*Nv+(i-1),r+1]**(-1))                             
                 f_1[:,:]=f_temp4[:,:]
                 f_1[:,0]=f_initial[:,0]
 
