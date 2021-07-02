@@ -85,7 +85,7 @@ def U_solar(r):
         return U_f*(np.exp(r/10.)-np.exp(-r/10.))/(np.exp(r/10.)+np.exp(-r/10.)) 
 
 def dU_solar(x):
-        return U_f*(1./10.)*(2./(np.exp(x/10.)+np.exp(-x/10.)))**2
+        return 0#U_f*(1./10.)*(2./(np.exp(x/10.)+np.exp(-x/10.)))**2
 
 def cos(r):
         return (1/(1+(r*Omega/U_solar(r))**2)**0.5)
@@ -216,7 +216,7 @@ d_pal_po_per_po=np.zeros(shape = (Nr, 1))
 for r in range(Nr):
         d_pal_po_per_po[r]=abs(f_1[(Nv-1)*Nv+Nv-1,r]/f_1[(Nv-2)*Nv+Nv-2,r])#abs(f_1[r*(Nv)*(Nv)+(Nv-1)*Nv+Nv-1]-f_1[r*(Nv)*(Nv)+(Nv-2)*Nv+Nv-2])
          
-Col=4*np.pi/(r_s**2*v_Ae_0**4)*(q**2/(4*np.pi*epsilon*Me))**2*25
+Col=0#4*np.pi/(r_s**2*v_Ae_0**4)*(q**2/(4*np.pi*epsilon*Me))**2*25
 
 def Collision_Core(a,b,x):
     for r in range(Nr):
@@ -435,7 +435,7 @@ def electric(x):
                 E=U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l]*Temperature_pal[l]-Density_next[l-1]*Temperature_pal[l-1])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[r]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
         else:
                 E=U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l+1]*Temperature_pal[l+1]-Density_next[l]*Temperature_pal[l])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[r]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
-        return E
+        return 0#E
 
 
 def Matrix_A(R,M):
@@ -506,7 +506,7 @@ def Matrix_alpha(R,M):
            elif R==Nr-1:
               alpha[i,j] =-0*(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0
            else:
-              alpha[i,j] =-0*(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0 #*rect((2.*(t[1]-t[0])/z[R])*f_1[M*Nv+i,R]/Mf[0]+Fz*0.5*(f_1[M*Nv+i,R+1]/Mf[0]-f_1[M*Nv+i,R-1]/Mf[0]))     return alpha
+              alpha[i,j] =-(Fz/2)*(U_solar(z[R])+pal_v[i]*cos(z[R])) if j==i else 0 #*rect((2.*(t[1]-t[0])/z[R])*f_1[M*Nv+i,R]/Mf[0]+Fz*0.5*(f_1[M*Nv+i,R+1]/Mf[0]-f_1[M*Nv+i,R-1]/Mf[0]))     return alpha
     return alpha
 
 def Matrix_AA(R):
@@ -597,7 +597,7 @@ def Matrix_QQ(R):
     return AA
 
 
-f_1 = np.load('data_next.npy')
+#f_1 = np.load('data_next.npy')
 updatetime=1
 timestep=1000 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
@@ -649,7 +649,7 @@ for p in range(updatetime):
                         E=U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l]*Temperature_pal[l]-Density_next[l-1]*Temperature_pal[l-1])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[r]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
                 else:
                         E=U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l+1]*Temperature_pal[l+1]-Density_next[l]*Temperature_pal[l])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[r]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
-                return E
+                return 0#E
 
 
         def Collision_Core(a,b,x):
