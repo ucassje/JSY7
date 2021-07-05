@@ -906,12 +906,12 @@ for p in range(updatetime):
             
                 maxx=np.amax(f_1)
         
-                #for r in range(Nr):
-                #        if r>0:
-                #                for j in range(Nv):
-                #                        for i in range(Nv):
-                #                                if f_1[j*Nv+i,r]<0:
-                #                                        f_1[j*Nv+i,r]=maxx*10**(-50)
+                for r in range(Nr):
+                        if r>0:
+                                for j in range(Nv):
+                                        for i in range(Nv):
+                                                if f_1[j*Nv+i,r]<0:
+                                                        f_1[j*Nv+i,r]=f_pre[j*Nv+i,r]
 
                 f_temp4=np.zeros(shape = (Nv**2, Nr))
                 f_temp4[:,:]=f_1[:,:]                                
