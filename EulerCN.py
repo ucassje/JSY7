@@ -781,7 +781,7 @@ def Matrix_QQ(R):
 
 
 #f_1 = np.load('data_next.npy')
-updatetime=2
+updatetime=10
 timestep=100 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
@@ -1282,38 +1282,7 @@ for p in range(updatetime):
                 f_1[:,:]=f_temp1[:,:]
                 f_1[:,0]=f_initial[:,0]
         
-
-                for j in range(Nv):
-                       for i in range(Nv):
-                               if f_1[(j)*Nv+i,15]/np.amax(f_1)>1:
-                                       solu1[j,i]=0
-                               elif f_1[(j)*Nv+i,15]/np.amax(f_1)>10**(-10):
-                                       solu1[j,i]=np.log10(f_1[(j)*Nv+i,15]/np.amax(f_1))
-                               else:
-                                       solu1[j,i]=-10
-                fig = plt.figure()
-                fig.set_dpi(500)
-                plt.contourf(X2, Y2,solu1, cont_lev,cmap='Blues');
-                ax = plt.gca()
-                ax.spines['left'].set_position('center')
-                ax.spines['left'].set_smart_bounds(True)
-                ax.spines['bottom'].set_position('zero')
-                ax.spines['bottom'].set_smart_bounds(True)
-                ax.spines['right'].set_color('none')
-                ax.spines['top'].set_color('none')
-                ax.xaxis.set_ticks_position('bottom')
-                plt.axis('equal')
-                ax.xaxis.set_ticks_position('bottom')
-                ax.yaxis.set_ticks_position('left')
-                plt.rc('font', size=8)
-                plt.tick_params(labelsize=8)
-                plt.text(pal_v[Nv-13],0.5,r'$\mathcal{v}_\parallel/\mathcal{v}_{Ae0}$', fontsize=12)
-                plt.text(0.,pal_v[Nv-4],r'$\mathcal{v}_\perp/\mathcal{v}_{Ae0}$', fontsize=12)
-                plt.text(pal_v[Nv-23],pal_v[Nv-4], r'$r/r_s=$' "%.2f" % z[15], fontsize=12)
-                plt.colorbar(label=r'$Log(F/F_{MAX})$')
-                plt.savefig(f'{path_current}r=15/{k}.png')
-                plt.clf()
-                plt.close()    
+ 
 
                 
                 f_next[:,:]=f_1[:,:]
