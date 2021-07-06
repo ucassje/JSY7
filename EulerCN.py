@@ -18,7 +18,7 @@ from lmfit import Parameters, fit_report, minimize
 #from lmfit import Model
 import lmfit
 
-Nv=31 #velocity step number
+Nv=81 #velocity step number
 i_solar_r=5 #10
 f_solar_r=20 #30
 path_home="/Users/user/Desktop/JSY7/"
@@ -43,7 +43,7 @@ pal_v = np.linspace(-Mv, Mv, Nv)
 per_v = np.linspace(-Mv, Mv, Nv)
 delv=pal_v[1]-pal_v[0]
 
-Nr=30      #radial step number
+Nr=50      #radial step number
 r_s=696340000.
 z=np.linspace(i_solar_r, f_solar_r, Nr)
 delz=z[1]-z[0]
@@ -781,7 +781,7 @@ def Matrix_QQ(R):
 
 
 #f_1 = np.load('data_next.npy')
-updatetime=10
+updatetime=2
 timestep=100 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
@@ -1231,16 +1231,6 @@ for p in range(updatetime):
                 f_1[:,0]=f_initial[:,0]
              
 
-                f_temp4=np.zeros(shape = (Nv**2, Nr))
-                f_temp4[:,:]=f_1[:,:]                                
-                for r in range(Nr-1):
-                            for j in range(Nv):
-                                    for i in range(Nv):
-                                            if i!=Nv-1 and i!=0 and j!=Nv-1 and j!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1]))                             
-                f_1[:,:]=f_temp4[:,:]
-                f_1[:,0]=f_initial[:,0] 
-
                 f_temp1=np.zeros(shape = (Nv**2, Nr))
                 f_temp1[:,:]=f_1[:,:]
                 for r in range(Nr):                                             #Von neumann boundary condition for v-derivative
@@ -1283,7 +1273,15 @@ for p in range(updatetime):
                 f_1[:,:]=f_temp1[:,:]
                 f_1[:,0]=f_initial[:,0]
         
-   
+                f_temp4=np.zeros(shape = (Nv**2, Nr))
+                f_temp4[:,:]=f_1[:,:]                                
+                for r in range(Nr-1):
+                            for j in range(Nv):
+                                    for i in range(Nv):
+                                            if i!=Nv-1 and i!=0 and j!=Nv-1 and j!=0:
+                                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1]))                             
+                f_1[:,:]=f_temp4[:,:]
+                f_1[:,0]=f_initial[:,0]    
 
                 
                 f_next[:,:]=f_1[:,:]
@@ -1353,7 +1351,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for i in range(Nv):
-        solu2[i]=np.log10(f_1[(15)*Nv+i,r]/np.amax(f_1))
+        solu2[i]=np.log10(f_1[(40)*Nv+i,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(pal_v,solu2,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
@@ -1378,7 +1376,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for j in range(Nv):
-        solu4[j]=np.log10(f_1[(j)*Nv+15,r]/np.amax(f_1))
+        solu4[j]=np.log10(f_1[(j)*Nv+40,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(per_v,solu4,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
