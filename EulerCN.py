@@ -1145,7 +1145,7 @@ for p in range(updatetime):
                       for i in range(Nv):
                               if per_v[j]<0:
                                       temp=temp
-                              per_v[j]>=0 and j!=0 and j!=Nv-1:
+                              elif per_v[j]>=0 and j!=0 and j!=Nv-1:
                                       temp=temp+2*np.pi*pal_v[i]*H_perp(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                p_col_H1[r]=Col*temp
 
@@ -1156,7 +1156,7 @@ for p in range(updatetime):
                       for i in range(Nv):
                               if per_v[j]<0:
                                       temp=temp
-                              per_v[j]>=0 and i!=0 and i!=Nv-1:
+                              elif per_v[j]>=0 and i!=0 and i!=Nv-1:
                                       temp=temp+2*np.pi*pal_v[i]*H_palp(pal_v[i],per_v[j],z[r])*((f_1[j*Nv+i+1,r]-f_1[j*Nv+i-1,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                p_col_H2[r]=Col*temp
 
