@@ -781,7 +781,7 @@ def Matrix_QQ(R):
 
 
 f_1 = np.load('data_next.npy')
-updatetime=6
+updatetime=2
 timestep=100 #700
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
