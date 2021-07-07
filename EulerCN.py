@@ -216,7 +216,7 @@ d_pal_po_per_po=np.zeros(shape = (Nr, 1))
 for r in range(Nr):
         d_pal_po_per_po[r]=abs(f_1[(Nv-1)*Nv+Nv-1,r]/f_1[(Nv-2)*Nv+Nv-2,r])#abs(f_1[r*(Nv)*(Nv)+(Nv-1)*Nv+Nv-1]-f_1[r*(Nv)*(Nv)+(Nv-2)*Nv+Nv-2])
          
-Col=0#4*np.pi/(r_s**2*v_Ae_0**4)*(q**2/(4*np.pi*epsilon*Me))**2*25
+Col=4*np.pi/(r_s**2*v_Ae_0**4)*(q**2/(4*np.pi*epsilon*Me))**2*25
 
 def Collision_Core(a,b,x):
     for r in range(Nr):
@@ -1227,11 +1227,17 @@ for p in range(updatetime):
                                     for i in range(Nv):
                                             if r==Nr-2:
                                                     f_temp4[j*Nv+i,r+1]=f_1[j*Nv+i,r]*ratio_r[j*Nv+i,r]**(-1)#2*f_temp4[(r)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)-f_temp4[(r-1)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[(r-1)*(Nv)*(Nv)+j*Nv+i]**(-1)*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)   
-                                            else:
-                                                    f_temp4[j*Nv+i,r+1]=0.5*(0.5*(f_1[j*Nv+i,r]*ratio_r[j*Nv+i,r]**(-1)+f_1[j*Nv+i,r+1])+0.5*(f_1[j*Nv+i,r+1]+f_1[j*Nv+i,r+2]*ratio_r[j*Nv+i,r+1]))     #0.5*(f_1[(r)*(Nv)*(Nv)+j*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)+f_1[(r+2)*(Nv)*(Nv)+j*Nv+i]*ratio_r[(r+1)*(Nv)*(Nv)+j*Nv+i])                                
                 f_1[:,:]=f_temp4[:,:]
                 f_1[:,0]=f_initial[:,0]
-             
+
+                f_temp4=np.zeros(shape = (Nv**2, Nr))
+                f_temp4[:,:]=f_1[:,:]                                
+                for r in range(Nr-2):
+                            for j in range(Nv):
+                                    for i in range(Nv):
+                                                f_temp4[j*Nv+i,r+1]=0.5*(0.5*(f_1[j*Nv+i,r]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i,r])+f_1[j*Nv+i,r+1])+0.5*(f_1[j*Nv+i,r+1]+f_1[j*Nv+i,r+2]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i,r+2]))) #0.5*(0.5*(f_1[j*Nv+i,r]*ratio_r[j*Nv+i,r]**(-1)+f_1[j*Nv+i,r+1])+0.5*(f_1[j*Nv+i,r+1]+f_1[j*Nv+i,r+2]*ratio_r[j*Nv+i,r+1]))     #0.5*(f_1[(r)*(Nv)*(Nv)+j*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)+f_1[(r+2)*(Nv)*(Nv)+j*Nv+i]*ratio_r[(r+1)*(Nv)*(Nv)+j*Nv+i])                                
+                f_1[:,:]=f_temp4[:,:]
+                f_1[:,0]=f_initial[:,0]
 
                 f_temp1=np.zeros(shape = (Nv**2, Nr))
                 f_temp1[:,:]=f_1[:,:]
