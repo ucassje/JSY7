@@ -1242,7 +1242,7 @@ for p in range(updatetime):
                                       tempBulk=tempBulk+2*np.pi*pal_v[i]*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                               else:
                                       tempBulk=tempBulk
-                   Bulk[r]=tempBulk/((r_s**3)*Density[r])
+                   Bulk[r]=tempBulk/((r_s**3)*Density_next[r])
 
                 f_temp4=np.zeros(shape = (Nv**2, Nr))
                 f_temp4[:,:]=f_1[:,:]                                
