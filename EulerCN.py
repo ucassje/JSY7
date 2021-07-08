@@ -1212,6 +1212,8 @@ for p in range(updatetime):
                         f_1[:,r]=dot(AQ[:,:,r],f_pre[:,r])+dot(AalphaA[:,:,r],f_pre[:,r+1])-dot(AalphaA[:,:,r],f_pre[:,r-1])
             
                 maxx=np.amax(f_1)
+
+
         
                 for r in range(Nr):
                         if r>0:
@@ -1219,6 +1221,38 @@ for p in range(updatetime):
                                         for i in range(Nv):
                                                 if f_1[j*Nv+i,r]<0:
                                                         f_1[j*Nv+i,r]=f_pre[j*Nv+i,r]
+
+                Density_next=np.zeros(shape = (Nr))
+                for r in range(Nr):
+                tempDensity=0
+                for j in range(Nv):
+                      for i in range(Nv):
+                              if per_v[j]<0:
+                                      tempDensity=tempDensity
+                              else:
+                                      tempDensity=tempDensity+2*np.pi*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                Density_next[r]=tempDensity/(r_s**3)
+
+                Bulk=np.zeros(shape = (Nr))
+                for r in range(Nr):
+                   tempBulk=0
+                   for j in range(Nv):
+                      for i in range(Nv):
+                              if per_v[j]>=0:
+                                      tempBulk=tempBulk+2*np.pi*pal_v[i]*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                              else:
+                                      tempBulk=tempBulk
+                   Bulk[r]=tempBulk/((r_s**3)*Density[r])
+
+                f_temp4=np.zeros(shape = (Nv**2, Nr))
+                f_temp4[:,:]=f_1[:,:]                                
+                for r in range(Nr-1):
+                            for j in range(Nv):
+                                    for i in range(Nv):
+                                            if i!=0 and i!=Nv-1:
+                                                    f_temp4[j*Nv+i,r+1]=f_1[j*Nv+i,r+1]+Bulk[r+1]*((f_1[j*Nv+i+1,r+1]-f_1[j*Nv+i-1,r+1])/(2*delv))#2*f_temp4[(r)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)-f_temp4[(r-1)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[(r-1)*(Nv)*(Nv)+j*Nv+i]**(-1)*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)   
+                f_1[:,:]=f_temp4[:,:]
+                f_1[:,0]=f_initial[:,0]
 
                 f_temp4=np.zeros(shape = (Nv**2, Nr))
                 f_temp4[:,:]=f_1[:,:]                                
