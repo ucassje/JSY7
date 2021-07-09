@@ -145,7 +145,16 @@ for r in range(Nr):
                             tempDensity=tempDensity+2*np.pi*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
         Density_next[r]=tempDensity/(r_s**3)
 
-
+Bulk=np.zeros(shape = (Nr))
+for r in range(Nr):
+   tempBulk=0
+   for j in range(Nv):
+      for i in range(Nv):
+              if per_v[j]>=0:
+                      tempBulk=tempBulk+2*np.pi*pal_v[i]*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+              else:
+                      tempBulk=tempBulk
+   Bulk[r]=tempBulk/((r_s**3)*Density_next[r])
 
 Temperature_pal=np.zeros(shape = (Nr))
 for r in range(Nr):
@@ -586,9 +595,9 @@ def electric(x):
                 if abs(x-z[r])<0.5*delz:
                         l=r
         if l!=0:
-                E=-(1/((r_s**3)*Density_next[l]*cos(x)))*(e_col[l]+e_col_G1[l]+e_col_G2[l]+e_col_G3[l]+e_col_G4[l]+p_col[l]+p_col_G1[l]+p_col_G2[l]+p_col_G3[l]+p_col_G4[l]+p_col_H1[l]+p_col_H2[l])+U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l]*Temperature_pal[l]-Density_next[l-1]*Temperature_pal[l-1])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[l]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
+                E=-(Bulk[l]/(delt*cos(x)))-(1/((r_s**3)*Density_next[l]*cos(x)))*(e_col[l]+e_col_G1[l]+e_col_G2[l]+e_col_G3[l]+e_col_G4[l]+p_col[l]+p_col_G1[l]+p_col_G2[l]+p_col_G3[l]+p_col_G4[l]+p_col_H1[l]+p_col_H2[l])+U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l]*Temperature_pal[l]-Density_next[l-1]*Temperature_pal[l-1])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[l]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
         else:
-                E=-(1/((r_s**3)*Density_next[l]*cos(x)))*(e_col[l]+e_col_G1[l]+e_col_G2[l]+e_col_G3[l]+e_col_G4[l]+p_col[l]+p_col_G1[l]+p_col_G2[l]+p_col_G3[l]+p_col_G4[l]+p_col_H1[l]+p_col_H2[l])+U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l+1]*Temperature_pal[l+1]-Density_next[l]*Temperature_pal[l])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[l]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
+                E=-(Bulk[l]/(delt*cos(x)))-(1/((r_s**3)*Density_next[l]*cos(x)))*(e_col[l]+e_col_G1[l]+e_col_G2[l]+e_col_G3[l]+e_col_G4[l]+p_col[l]+p_col_G1[l]+p_col_G2[l]+p_col_G3[l]+p_col_G4[l]+p_col_H1[l]+p_col_H2[l])+U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l+1]*Temperature_pal[l+1]-Density_next[l]*Temperature_pal[l])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[l]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
         return E
 
 
@@ -799,6 +808,17 @@ for p in range(updatetime):
                               else:
                                       tempDensity=tempDensity+2*np.pi*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                Density_next[r]=tempDensity/(r_s**3)
+
+        Bulk=np.zeros(shape = (Nr))
+        for r in range(Nr):
+           tempBulk=0
+           for j in range(Nv):
+              for i in range(Nv):
+                      if per_v[j]>=0:
+                              tempBulk=tempBulk+2*np.pi*pal_v[i]*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                      else:
+                              tempBulk=tempBulk
+           Bulk[r]=tempBulk/((r_s**3)*Density_next[r])
 
 
         Temperature_pal=np.zeros(shape = (Nr))
@@ -1167,9 +1187,9 @@ for p in range(updatetime):
                         if abs(x-z[r])<0.5*delz:
                                 l=r
                 if l!=0:
-                        E=-(1/((r_s**3)*Density_next[l]*cos(x)))*(e_col[l]+e_col_G1[l]+e_col_G2[l]+e_col_G3[l]+e_col_G4[l]+p_col[l]+p_col_G1[l]+p_col_G2[l]+p_col_G3[l]+p_col_G4[l]+p_col_H1[l]+p_col_H2[l])+U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l]*Temperature_pal[l]-Density_next[l-1]*Temperature_pal[l-1])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[l]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
+                        E=-(Bulk[l]/(delt*cos(x)))-(1/((r_s**3)*Density_next[l]*cos(x)))*(e_col[l]+e_col_G1[l]+e_col_G2[l]+e_col_G3[l]+e_col_G4[l]+p_col[l]+p_col_G1[l]+p_col_G2[l]+p_col_G3[l]+p_col_G4[l]+p_col_H1[l]+p_col_H2[l])+U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l]*Temperature_pal[l]-Density_next[l-1]*Temperature_pal[l-1])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[l]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
                 else:
-                        E=-(1/((r_s**3)*Density_next[l]*cos(x)))*(e_col[l]+e_col_G1[l]+e_col_G2[l]+e_col_G3[l]+e_col_G4[l]+p_col[l]+p_col_G1[l]+p_col_G2[l]+p_col_G3[l]+p_col_G4[l]+p_col_H1[l]+p_col_H2[l])+U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l+1]*Temperature_pal[l+1]-Density_next[l]*Temperature_pal[l])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[l]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
+                        E=-(Bulk[l]/(delt*cos(x)))-(1/((r_s**3)*Density_next[l]*cos(x)))*(e_col[l]+e_col_G1[l]+e_col_G2[l]+e_col_G3[l]+e_col_G4[l]+p_col[l]+p_col_G1[l]+p_col_G2[l]+p_col_G3[l]+p_col_G4[l]+p_col_H1[l]+p_col_H2[l])+U_solar(x)*dU_solar(x)/(cos(x)**2)+(1/v_Ae_0**2)*(Bol_k)/(Me*Density_next[l])*(Density_next[l+1]*Temperature_pal[l+1]-Density_next[l]*Temperature_pal[l])/delz+2*(1/v_Ae_0**2)*(Bol_k)/(Me)*dcos(x)/cos(x)*Temperature_pal[l]+(1/v_Ae_0**2)*(Bol_k)/(Me)*dlnB(x)*Temperature_per[l]+(1/v_Ae_0**2)*(2*Bol_k)/(Me*x)*Temperature_pal[l]#+(1/Density_next[l])*(Density_next[l]*Bulk_next[l]-Density_pre[l]*Bulk_pre[l])/(10*delt)+(Bulk_next[l]/cos(x))*dU_solar(x)+Bulk_next[l]*(dU_solar(x)/cos(x)+U_solar(x)*dcos_1(x))+(U_solar(x)/cos(x))*Bulk_next[l]/x+(U_solar(x)/(cos(x)*Density_next[l]))*(Density_next[l]*Bulk_next[l]-Density_next[l-1]*Bulk_next[l-1])/delz
                 return E
 
         AQ=np.zeros(((Nv)*(Nv),(Nv)*(Nv),Nr))
@@ -1222,37 +1242,37 @@ for p in range(updatetime):
                                                 if f_1[j*Nv+i,r]<0:
                                                         f_1[j*Nv+i,r]=f_pre[j*Nv+i,r]
 
-                Density_next=np.zeros(shape = (Nr))
-                for r in range(Nr):
-                        tempDensity=0
-                        for j in range(Nv):
-                              for i in range(Nv):
-                                      if per_v[j]<0:
-                                              tempDensity=tempDensity
-                                      else:
-                                              tempDensity=tempDensity+2*np.pi*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
-                        Density_next[r]=tempDensity/(r_s**3)
+                #Density_next=np.zeros(shape = (Nr))
+                #for r in range(Nr):
+                #        tempDensity=0
+                #        for j in range(Nv):
+                #              for i in range(Nv):
+                #                      if per_v[j]<0:
+                #                              tempDensity=tempDensity
+                #                      else:
+                #                              tempDensity=tempDensity+2*np.pi*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                #        Density_next[r]=tempDensity/(r_s**3)
 
-                Bulk=np.zeros(shape = (Nr))
-                for r in range(Nr):
-                   tempBulk=0
-                   for j in range(Nv):
-                      for i in range(Nv):
-                              if per_v[j]>=0:
-                                      tempBulk=tempBulk+2*np.pi*pal_v[i]*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
-                              else:
-                                      tempBulk=tempBulk
-                   Bulk[r]=tempBulk/((r_s**3)*Density_next[r])
+                #Bulk=np.zeros(shape = (Nr))
+                #for r in range(Nr):
+                #   tempBulk=0
+                #   for j in range(Nv):
+                #      for i in range(Nv):
+                #              if per_v[j]>=0:
+                #                      tempBulk=tempBulk+2*np.pi*pal_v[i]*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                #              else:
+                #                      tempBulk=tempBulk
+                #   Bulk[r]=tempBulk/((r_s**3)*Density_next[r])
 
-                f_temp4=np.zeros(shape = (Nv**2, Nr))
-                f_temp4[:,:]=f_1[:,:]                                
-                for r in range(Nr-1):
-                            for j in range(Nv):
-                                    for i in range(Nv):
-                                            if i!=0 and i!=Nv-1:
-                                                    f_temp4[j*Nv+i,r+1]=f_1[j*Nv+i,r+1]+Bulk[r+1]*((f_1[j*Nv+i+1,r+1]-f_1[j*Nv+i-1,r+1])/(2*delv))#2*f_temp4[(r)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)-f_temp4[(r-1)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[(r-1)*(Nv)*(Nv)+j*Nv+i]**(-1)*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)   
-                f_1[:,:]=f_temp4[:,:]
-                f_1[:,0]=f_initial[:,0]
+                #f_temp4=np.zeros(shape = (Nv**2, Nr))
+                #f_temp4[:,:]=f_1[:,:]                                
+                #for r in range(Nr-1):
+                #            for j in range(Nv):
+                #                    for i in range(Nv):
+                #                            if i!=0 and i!=Nv-1:
+                #                                    f_temp4[j*Nv+i,r+1]=f_1[j*Nv+i,r+1]+Bulk[r+1]*((f_1[j*Nv+i+1,r+1]-f_1[j*Nv+i-1,r+1])/(2*delv))#2*f_temp4[(r)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)-f_temp4[(r-1)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[(r-1)*(Nv)*(Nv)+j*Nv+i]**(-1)*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)   
+                #f_1[:,:]=f_temp4[:,:]
+                #f_1[:,0]=f_initial[:,0]
 
                 f_temp4=np.zeros(shape = (Nv**2, Nr))
                 f_temp4[:,:]=f_1[:,:]                                
