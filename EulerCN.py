@@ -74,7 +74,7 @@ print((f_solar_r-i_solar_r)/U_f)
 print(((f_solar_r-i_solar_r)/U_f)/delt)
 
 
-updatetime=5
+updatetime=15
 timestep=25 #700
 
 #calculate Beta
@@ -793,7 +793,7 @@ def Matrix_QQ(R):
     return AA
 
 
-#f_1 = np.load('data_next.npy')
+f_1 = np.load('data_next.npy')
 
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
