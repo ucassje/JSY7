@@ -74,7 +74,7 @@ print((f_solar_r-i_solar_r)/U_f)
 print(((f_solar_r-i_solar_r)/U_f)/delt)
 
 
-updatetime=20
+updatetime=5
 timestep=25 #700
 
 #calculate Beta
