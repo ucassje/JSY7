@@ -1262,7 +1262,7 @@ for p in range(updatetime):
                 for r in range(Nr-2):
                             for j in range(Nv):
                                     for i in range(Nv):
-                                                f_temp4[j*Nv+i,r+1]=0.5*(0.5*(f_1[j*Nv+i,r]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i,r])+f_1[j*Nv+i,r+1])+0.5*(f_1[j*Nv+i,r+1]+f_1[j*Nv+i,r+2]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i,r+2])))#0.5*(0.5*(f_1[j*Nv+i,r]*ratio_r[j*Nv+i,r]**(-1)+f_1[j*Nv+i,r+1])+0.5*(f_1[j*Nv+i,r+1]+f_1[j*Nv+i,r+2]*ratio_r[j*Nv+i,r+1]))     #0.5*(f_1[(r)*(Nv)*(Nv)+j*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)+f_1[(r+2)*(Nv)*(Nv)+j*Nv+i]*ratio_r[(r+1)*(Nv)*(Nv)+j*Nv+i])                                
+                                                f_temp4[j*Nv+i,r+1]=0.5*(0.5*(f_1[j*Nv+i,r]*ratio_r[j*Nv+i,r]**(-1)+f_1[j*Nv+i,r+1])+0.5*(f_1[j*Nv+i,r+1]+f_1[j*Nv+i,r+2]*ratio_r[j*Nv+i,r+1]))     #0.5*(f_1[(r)*(Nv)*(Nv)+j*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)+f_1[(r+2)*(Nv)*(Nv)+j*Nv+i]*ratio_r[(r+1)*(Nv)*(Nv)+j*Nv+i])                                
                 f_1[:,:]=f_temp4[:,:]
                 f_1[:,0]=f_initial[:,0]
 
@@ -1273,38 +1273,38 @@ for p in range(updatetime):
                             for j in range(Nv):                      
                                     for i in range(Nv):
                                             if i==0 and j!=0 and j!=Nv-1 and j!=1 and j!=Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i+1,r]*d_pal_ne[j,r]#(4*f_1[(j+1)*Nv+i+1,r]+4*f_1[(j-1)*Nv+i+1,r]+4*f_1[(j)*Nv+i+3,r]-4*f_1[(j)*Nv+i+2,r]-4*f_1[(j)*Nv+i+1,r]-f_1[(j+2)*Nv+i+2,r]-f_1[(j-2)*Nv+i+2,r]-f_1[(j)*Nv+i+4,r])#2*f_1[(r)*(Nv)*(Nv)+(j)*Nv+i+1]-f_1[(r)*(Nv)*(Nv)+(j)*Nv+i+2] #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j)*Nv+i+1]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j)*Nv+i+2]/np.max(f_1)))    #np.max(f_1)*10**((pal_v[i]-pal_v[i+2])/(pal_v[i+2]-pal_v[i+1]))*(np.log10(f_1[(r)*(Nv)*(Nv)+j*Nv+i+2]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+j*Nv+i+1]/np.max(f_1)))+np.log10(f_1[(r)*(Nv)*(Nv)+j*Nv+i+2]/np.max(f_1))                               #((pal_v[i]-pal_v[i+2])/(pal_v[i+2]-pal_v[i+1]))*(f_1[(r)*(Nv)*(Nv)+j*Nv+i+2]-f_1[(r)*(Nv)*(Nv)+j*Nv+i+1])+f_1[(r)*(Nv)*(Nv)+j*Nv+i+2] 
+                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i+1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j)*Nv+i+1,r])#f_1[(j)*Nv+i+1,r]*d_pal_ne[j,r]#(4*f_1[(j+1)*Nv+i+1,r]+4*f_1[(j-1)*Nv+i+1,r]+4*f_1[(j)*Nv+i+3,r]-4*f_1[(j)*Nv+i+2,r]-4*f_1[(j)*Nv+i+1,r]-f_1[(j+2)*Nv+i+2,r]-f_1[(j-2)*Nv+i+2,r]-f_1[(j)*Nv+i+4,r])#2*f_1[(r)*(Nv)*(Nv)+(j)*Nv+i+1]-f_1[(r)*(Nv)*(Nv)+(j)*Nv+i+2] #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j)*Nv+i+1]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j)*Nv+i+2]/np.max(f_1)))    #np.max(f_1)*10**((pal_v[i]-pal_v[i+2])/(pal_v[i+2]-pal_v[i+1]))*(np.log10(f_1[(r)*(Nv)*(Nv)+j*Nv+i+2]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+j*Nv+i+1]/np.max(f_1)))+np.log10(f_1[(r)*(Nv)*(Nv)+j*Nv+i+2]/np.max(f_1))                               #((pal_v[i]-pal_v[i+2])/(pal_v[i+2]-pal_v[i+1]))*(f_1[(r)*(Nv)*(Nv)+j*Nv+i+2]-f_1[(r)*(Nv)*(Nv)+j*Nv+i+1])+f_1[(r)*(Nv)*(Nv)+j*Nv+i+2] 
                                             if i==Nv-1 and j!=0 and j!=Nv-1 and j!=1 and j!=Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]*d_pal_po[j,r]#(4*f_1[(j+1)*Nv+i-1,r]+4*f_1[(j-1)*Nv+i-1,r]+4*f_1[(j)*Nv+i-3,r]-4*f_1[(j)*Nv+i-2,r]-4*f_1[(j)*Nv+i-1,r]-f_1[(j+2)*Nv+i-2,r]-f_1[(j-2)*Nv+i-2,r]-f_1[(j)*Nv+i-4,r]) #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j)*Nv+i-1]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j)*Nv+i-2]/np.max(f_1)))                                  #((pal_v[i]-pal_v[i-2])/(pal_v[i-2]-pal_v[i-1]))*(f_1[(r)*(Nv)*(Nv)+j*Nv+i-2]-f_1[(r)*(Nv)*(Nv)+j*Nv+i-1])+f_1[(r)*(Nv)*(Nv)+j*Nv+i-2] 
+                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j)*Nv+i-1,r])#f_1[(j)*Nv+i-1,r]*d_pal_po[j,r]#(4*f_1[(j+1)*Nv+i-1,r]+4*f_1[(j-1)*Nv+i-1,r]+4*f_1[(j)*Nv+i-3,r]-4*f_1[(j)*Nv+i-2,r]-4*f_1[(j)*Nv+i-1,r]-f_1[(j+2)*Nv+i-2,r]-f_1[(j-2)*Nv+i-2,r]-f_1[(j)*Nv+i-4,r]) #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j)*Nv+i-1]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j)*Nv+i-2]/np.max(f_1)))                                  #((pal_v[i]-pal_v[i-2])/(pal_v[i-2]-pal_v[i-1]))*(f_1[(r)*(Nv)*(Nv)+j*Nv+i-2]-f_1[(r)*(Nv)*(Nv)+j*Nv+i-1])+f_1[(r)*(Nv)*(Nv)+j*Nv+i-2] 
                                             if i==0 and j==1:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i+1,r]*d_pal_ne[j,r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i+1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j)*Nv+i+1,r])#f_1[(j)*Nv+i+1,r]*d_pal_ne[j,r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
                                             if i==0 and j==Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i+1,r]*d_pal_ne[j,r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i+1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j)*Nv+i+1,r])#f_1[(j)*Nv+i+1,r]*d_pal_ne[j,r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
                                             if i==Nv-1 and j==1:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]*d_pal_po[j,r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j)*Nv+i-1,r])#f_1[(j)*Nv+i-1,r]*d_pal_po[j,r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                                             if i==Nv-1 and j==Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]*d_pal_po[j,r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j)*Nv+i-1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j)*Nv+i-1,r])#f_1[(j)*Nv+i-1,r]*d_pal_po[j,r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                                         
                                             if j==0 and i!=0 and i!=Nv-1 and i!=1 and i!=Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i,r]*d_per_ne[i,r]#(4*f_1[(j+1)*Nv+i+1,r]+4*f_1[(j+1)*Nv+i-1,r]+4*f_1[(j+3)*Nv+i,r]-4*f_1[(j+2)*Nv+i,r]-4*f_1[(j+1)*Nv+i,r]-f_1[(j+2)*Nv+i+2,r]-f_1[(j+2)*Nv+i-2,r]-f_1[(j+4)*Nv+i,r])#2*f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i] #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i]/np.max(f_1)))                            #((per_v[j]-per_v[j+2])/(per_v[j+2]-per_v[j+1]))*(f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i])+f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i] 
+                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j+1)*Nv+i,r])#f_1[(j+1)*Nv+i,r]*d_per_ne[i,r]#(4*f_1[(j+1)*Nv+i+1,r]+4*f_1[(j+1)*Nv+i-1,r]+4*f_1[(j+3)*Nv+i,r]-4*f_1[(j+2)*Nv+i,r]-4*f_1[(j+1)*Nv+i,r]-f_1[(j+2)*Nv+i+2,r]-f_1[(j+2)*Nv+i-2,r]-f_1[(j+4)*Nv+i,r])#2*f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i] #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i]/np.max(f_1)))                            #((per_v[j]-per_v[j+2])/(per_v[j+2]-per_v[j+1]))*(f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j+1)*Nv+i])+f_1[(r)*(Nv)*(Nv)+(j+2)*Nv+i] 
                                             if j==Nv-1 and i!=0 and i!=Nv-1 and i!=1 and i!=Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j-1)*Nv+i,r]*d_per_po[i,r]#(4*f_1[(j-1)*Nv+i-1,r]+4*f_1[(j-1)*Nv+i+1,r]+4*f_1[(j-3)*Nv+i,r]-4*f_1[(j-2)*Nv+i,r]-4*f_1[(j-1)*Nv+i,r]-f_1[(j-2)*Nv+i+2,r]-f_1[(j-2)*Nv+i-2,r]-f_1[(j-4)*Nv+i,r])#2*f_1[(r)*(Nv)*(Nv)+(j-1)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j-2)*Nv+i] #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j-1)*Nv+i]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j-2)*Nv+i]/np.max(f_1)))                                #((per_v[j]-per_v[j-2])/(per_v[j-2]-per_v[j-1]))*(f_1[(r)*(Nv)*(Nv)+(j-2)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j-1)*Nv+i])+f_1[(r)*(Nv)*(Nv)+(j-2)*Nv+i]                                                                                
+                                                    f_temp1[j*Nv+i,r]=f_1[(j-1)*Nv+i,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j-1)*Nv+i,r])#f_1[(j-1)*Nv+i,r]*d_per_po[i,r]#(4*f_1[(j-1)*Nv+i-1,r]+4*f_1[(j-1)*Nv+i+1,r]+4*f_1[(j-3)*Nv+i,r]-4*f_1[(j-2)*Nv+i,r]-4*f_1[(j-1)*Nv+i,r]-f_1[(j-2)*Nv+i+2,r]-f_1[(j-2)*Nv+i-2,r]-f_1[(j-4)*Nv+i,r])#2*f_1[(r)*(Nv)*(Nv)+(j-1)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j-2)*Nv+i] #np.max(f_1)*10**(2*np.log10(f_1[(r)*(Nv)*(Nv)+(j-1)*Nv+i]/np.max(f_1))-np.log10(f_1[(r)*(Nv)*(Nv)+(j-2)*Nv+i]/np.max(f_1)))                                #((per_v[j]-per_v[j-2])/(per_v[j-2]-per_v[j-1]))*(f_1[(r)*(Nv)*(Nv)+(j-2)*Nv+i]-f_1[(r)*(Nv)*(Nv)+(j-1)*Nv+i])+f_1[(r)*(Nv)*(Nv)+(j-2)*Nv+i]                                                                                
                                             if j==0 and i==1:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i,r]*d_per_ne[i,r]#2*f_1[(j+1)*Nv+i,r]-f_1[(j+2)*Nv+i,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j+1)*Nv+i,r])#f_1[(j+1)*Nv+i,r]*d_per_ne[i,r]#2*f_1[(j+1)*Nv+i,r]-f_1[(j+2)*Nv+i,r]
                                             if j==0 and i==Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i,r]*d_per_ne[i,r]#2*f_1[(j+1)*Nv+i,r]-f_1[(j+2)*Nv+i,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j+1)*Nv+i,r])#f_1[(j+1)*Nv+i,r]*d_per_ne[i,r]#2*f_1[(j+1)*Nv+i,r]-f_1[(j+2)*Nv+i,r]
                                             if j==Nv-1 and i==1:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j-1)*Nv+i,r]*d_per_po[i,r]#2*f_1[(j-1)*Nv+i,r]-f_1[(j-2)*Nv+i,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j-1)*Nv+i,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j-1)*Nv+i,r])#f_1[(j-1)*Nv+i,r]*d_per_po[i,r]#2*f_1[(j-1)*Nv+i,r]-f_1[(j-2)*Nv+i,r]
                                             if j==Nv-1 and i==Nv-2:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j-1)*Nv+i,r]*d_per_po[i,r]#2*f_1[(j-1)*Nv+i,r]-f_1[(j-2)*Nv+i,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j-1)*Nv+i,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j-1)*Nv+i,r])#f_1[(j-1)*Nv+i,r]*d_per_po[i,r]#2*f_1[(j-1)*Nv+i,r]-f_1[(j-2)*Nv+i,r]
                                             if j==0 and i==0:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i+1,r]*d_pal_ne_per_ne[r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i+1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j+1)*Nv+i+1,r])#f_1[(j+1)*Nv+i+1,r]*d_pal_ne_per_ne[r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
                                             if j==0 and i==Nv-1:
-                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i-1,r]*d_pal_po_per_ne[r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
+                                                    f_temp1[j*Nv+i,r]=f_1[(j+1)*Nv+i-1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j+1)*Nv+i-1,r])#f_1[(j+1)*Nv+i-1,r]*d_pal_po_per_ne[r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                                             if j==Nv-1 and i==0:
-                                                    f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i+1,r]*d_pal_ne_per_po[r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
+                                                    f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i+1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j-1)*Nv+i+1,r])#f_1[(j-1)*Nv+i+1,r]*d_pal_ne_per_po[r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
                                             if j==Nv-1 and i==Nv-1:
-                                                    f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i-1,r]*d_pal_po_per_po[r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
+                                                    f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i-1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j-1)*Nv+i-1,r)#f_1[(j-1)*Nv+i-1,r]*d_pal_po_per_po[r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                 f_1[:,:]=f_temp1[:,:]
                 f_1[:,0]=f_initial[:,0]
         
