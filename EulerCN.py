@@ -1304,7 +1304,7 @@ for p in range(updatetime):
                                             if j==Nv-1 and i==0:
                                                     f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i+1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j-1)*Nv+i+1,r])#f_1[(j-1)*Nv+i+1,r]*d_pal_ne_per_po[r]#2*f_1[(j)*Nv+i+1,r]-f_1[(j)*Nv+i+2,r]
                                             if j==Nv-1 and i==Nv-1:
-                                                    f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i-1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j-1)*Nv+i-1,r)#f_1[(j-1)*Nv+i-1,r]*d_pal_po_per_po[r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
+                                                    f_temp1[(j)*Nv+i,r]=f_1[(j-1)*Nv+i-1,r]*(f_pre[(j)*Nv+i,r]/f_pre[(j-1)*Nv+i-1,r])#f_1[(j-1)*Nv+i-1,r]*d_pal_po_per_po[r]#2*f_1[(j)*Nv+i-1,r]-f_1[(j)*Nv+i-2,r]
                 f_1[:,:]=f_temp1[:,:]
                 f_1[:,0]=f_initial[:,0]
         
