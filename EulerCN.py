@@ -18,7 +18,7 @@ from lmfit import Parameters, fit_report, minimize
 #from lmfit import Model
 import lmfit
 
-Nv=81 #velocity step number
+Nv=31 #velocity step number
 i_solar_r=5 #10
 f_solar_r=20 #30
 path_home="/Users/user/Desktop/JSY7/"
@@ -43,7 +43,7 @@ pal_v = np.linspace(-Mv, Mv, Nv)
 per_v = np.linspace(-Mv, Mv, Nv)
 delv=pal_v[1]-pal_v[0]
 
-Nr=50      #radial step number
+Nr=30      #radial step number
 r_s=696340000.
 z=np.linspace(i_solar_r, f_solar_r, Nr)
 delz=z[1]-z[0]
@@ -74,7 +74,7 @@ print((f_solar_r-i_solar_r)/U_f)
 print(((f_solar_r-i_solar_r)/U_f)/delt)
 
 
-updatetime=20
+updatetime=40
 timestep=25 #700
 
 #calculate Beta
@@ -1318,6 +1318,14 @@ for p in range(updatetime):
                                     for i in range(Nv):
                                             if i!=Nv-1 and i!=0 and j!=Nv-1 and j!=0:
                                                     f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1]))                             
+                                            elif i==Nv-1 and j!=Nv-1 and j!=0:
+                                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])) 
+                                            elif i==0 and j!=Nv-1 and j!=0:
+                                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])) 
+                                            elif j==Nv-1 and i!=Nv-1 and i!=0:
+                                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])+0.5*f_1[(j)*Nv+i+1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i+1,r+1])+0.5*f_1[(j)*Nv+i-1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i-1,r+1])) 
+                                            elif j==0 and i!=Nv-1 and i!=0:
+                                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j)*Nv+i+1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i+1,r+1])+0.5*f_1[(j)*Nv+i-1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i-1,r+1])) 
                 f_1[:,:]=f_temp4[:,:]
                 f_1[:,0]=f_initial[:,0]    
 
@@ -1393,7 +1401,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for i in range(Nv):
-        solu2[i]=np.log10(f_1[(40)*Nv+i,r]/np.amax(f_1))
+        solu2[i]=np.log10(f_1[(15)*Nv+i,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(pal_v,solu2,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
@@ -1418,7 +1426,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for j in range(Nv):
-        solu4[j]=np.log10(f_1[(j)*Nv+40,r]/np.amax(f_1))
+        solu4[j]=np.log10(f_1[(j)*Nv+15,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(per_v,solu4,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
