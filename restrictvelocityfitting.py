@@ -135,7 +135,16 @@ beta_s=np.zeros(shape = (Nr))
 h=0
 f_1 = np.load('data_next.npy')
 
-
+Density=np.zeros(shape = (Nr))
+for r in range(Nr):
+   tempDensity=0
+   for j in range(Nv):
+      for i in range(Nv):
+              if per_v[j]<0:
+                      tempDensity=tempDensity
+              else:
+                      tempDensity=tempDensity+2*np.pi*f_1[j*Nv+i,r]*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+   Density[r]=tempDensity/(r_s**3)
 
 for j in range(Nv):
         if per_v[j]>13:
@@ -145,17 +154,6 @@ f_11=np.zeros(shape = (Nv*(Nv-2*h), 1))
 for j in range(Nv-2*h):
         for i in range(Nv):
             f_11[j*Nv+i]=f_1[(j+h)*Nv+i,Nr-1]
-
-Density=np.zeros(shape = (Nr))
-for r in range(Nr):
-   tempDensity=0
-   for j in range(Nv-2*h):
-      for i in range(Nv):
-              if per_v[j]<0:
-                      tempDensity=tempDensity
-              else:
-                      tempDensity=tempDensity+2*np.pi*f_1[(j+h)*Nv+i,r]*abs(per_v[j+h])*(pal_v[1]-pal_v[0])**2
-   Density[r]=tempDensity/(r_s**3)
 
 
 #per_v2 = np.linspace(-13, 13, (Nv-2*h))
