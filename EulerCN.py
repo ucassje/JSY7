@@ -98,10 +98,10 @@ def dcos_1(r):
         return ((r*(Omega/U_solar(r))**2-(r*Omega/U_solar(r))**2/U_solar(r)*dU_solar(r))/(1+(r*Omega/U_solar(r))**2)**0.5)
 
 def temperature(r):
-        return T_e*(i_solar_r/r)**(0.8) #T_e*np.exp(-(r-i_solar_r)**2/600) #T_e*np.exp(2/(r-2.2)**0.7) #(0.1*T_e-T_e)/(f_solar_r-i_solar_r)*(r-i_solar_r)+T_e
+        return T_e*(i_solar_r/r)**(0.7) #T_e*np.exp(-(r-i_solar_r)**2/600) #T_e*np.exp(2/(r-2.2)**0.7) #(0.1*T_e-T_e)/(f_solar_r-i_solar_r)*(r-i_solar_r)+T_e
 
 def lntemperature(r):
-        return -0.8*(1/r)#-(r-i_solar_r)/300 #-1.4/(r-2.2)**(1.7) #(0.1*T_e-T_e)/(f_solar_r-i_solar_r)/((0.1*T_e-T_e)/(f_solar_r-i_solar_r)*(r-i_solar_r)+T_e) 
+        return -0.7*(1/r)#-(r-i_solar_r)/300 #-1.4/(r-2.2)**(1.7) #(0.1*T_e-T_e)/(f_solar_r-i_solar_r)/((0.1*T_e-T_e)/(f_solar_r-i_solar_r)*(r-i_solar_r)+T_e) 
 
 def temperature_per(r):
         return 0.6*T_e*np.exp(2/(r-2.2)**0.7) #-0.75
@@ -793,7 +793,7 @@ def Matrix_QQ(R):
     return AA
 
 
-f_1 = np.load('data_next.npy')
+#f_1 = np.load('data_next.npy')
 
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
