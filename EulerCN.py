@@ -74,16 +74,13 @@ print((f_solar_r-i_solar_r)/U_f)
 print(((f_solar_r-i_solar_r)/U_f)/delt)
 
 
-updatetime=20
+updatetime=40
 timestep=25 #700
 
 #calculate Beta
 
 def n(r):
         return n_0(i_solar_r)*(i_solar_r/r)**2*(U_solar(215)/U_solar(r))
-
-def lnn(r):
-        return -2/r
 
 def U_solar(r):
         return U_f*(np.exp(r/10.)-np.exp(-r/10.))/(np.exp(r/10.)+np.exp(-r/10.)) 
@@ -92,19 +89,10 @@ def dU_solar(x):
         return U_f*(1./10.)*(2./(np.exp(x/10.)+np.exp(-x/10.)))**2
 
 def cos(r):
-        return (1/(1+(r*Omega/U_solar(r))**2)**0.5)
-
-def dcos_1(r):
-        return ((r*(Omega/U_solar(r))**2-(r*Omega/U_solar(r))**2/U_solar(r)*dU_solar(r))/(1+(r*Omega/U_solar(r))**2)**0.5)
+        return (1/(1+((r-i_solar_r)*Omega/U_solar(r))**2)**0.5)
 
 def temperature(r):
         return T_e*(i_solar_r/r)**(0.7) #T_e*np.exp(-(r-i_solar_r)**2/600) #T_e*np.exp(2/(r-2.2)**0.7) #(0.1*T_e-T_e)/(f_solar_r-i_solar_r)*(r-i_solar_r)+T_e
-
-def lntemperature(r):
-        return -0.7*(1/r)#-(r-i_solar_r)/300 #-1.4/(r-2.2)**(1.7) #(0.1*T_e-T_e)/(f_solar_r-i_solar_r)/((0.1*T_e-T_e)/(f_solar_r-i_solar_r)*(r-i_solar_r)+T_e) 
-
-def temperature_per(r):
-        return 0.6*T_e*np.exp(2/(r-2.2)**0.7) #-0.75
 
 def v_th_function(T):
         kappa=20
@@ -114,9 +102,6 @@ def v_th_function_p(T):
         kappa=20
         return ((2)*Bol_k*T/(Mp))**0.5/v_Ae_0
 
-def kappa_v_th_function(T):
-        kappa=2 #3
-        return ((2.*kappa-3)*Bol_k*T/(kappa*Me))**0.5/v_Ae_0
 
 def Kappa_Initial_Core(a,b,r):
    kappac=8 #2
@@ -420,17 +405,9 @@ def H_perp(a,b,x):
 def rect_v(x):
 	return 1#0 if abs(x)>=abs(pal_v[0]) else 1
 
-def sin(x):
-        return (1/(1+(U_solar(x)/Omega*(1/x))**2)**0.5)
-
 def dcos(x):
-        return -1/(1+(x*Omega/U_solar(x))**2)**1.5*(((Omega/U_solar(x))**2*x)-x**2*(Omega**2/U_solar(x)**3)*dU_solar(x))
+        return -1/(1+(x*Omega/U_solar(x))**2)**1.5*(((Omega/U_solar(x))**2*(x-i_solar_r))-(x-i_solar_r)**2*(Omega**2/U_solar(x)**3)*dU_solar(x))
 
-def dsin(x):
-        return ((U_solar(x)/Omega*(1/x))**2*(1/x**3))/(1+(U_solar(x)/Omega*(1/x))**2)**1.5
-
-#def dlnB(x):
-#        return (-(1/x)*(2+(x*Omega/U_solar(x))**2)/(1+(x*Omega/U_solar(x))**2))
 
 def B(x):
         return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
@@ -793,7 +770,7 @@ def Matrix_QQ(R):
     return AA
 
 
-f_1 = np.load('data_next.npy')
+#f_1 = np.load('data_next.npy')
 
 Normvalue=np.zeros(shape = (timestep*updatetime))
 for p in range(updatetime):
