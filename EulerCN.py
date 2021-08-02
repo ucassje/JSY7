@@ -1224,15 +1224,7 @@ for p in range(updatetime):
 
 
                 f_1[:,Nr-1]=f_1[:,Nr-2]*ratio_r[:,Nr-2]**(-1)
-                #f_temp4=np.zeros(shape = (Nv**2, Nr))
-                #f_temp4[:,:]=f_1[:,:]                                
-                #for r in range(Nr-1):
-                #            for j in range(Nv):
-                #                    for i in range(Nv):
-                #                            if r==Nr-2:
-                #                                    f_temp4[j*Nv+i,r+1]=f_1[j*Nv+i,r]*ratio_r[j*Nv+i,r]**(-1)#2*f_temp4[(r)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)-f_temp4[(r-1)*(Nv)*(Nv)+(j)*Nv+i]*ratio_r[(r-1)*(Nv)*(Nv)+j*Nv+i]**(-1)*ratio_r[r*(Nv)*(Nv)+j*Nv+i]**(-1)   
-                #f_1[:,:]=f_temp4[:,:]
-                #f_1[:,0]=f_initial[:,0]
+
 
                 f_temp4=np.zeros(shape = (Nv**2, Nr))
                 f_temp4[:,:]=f_1[:,:]                                
