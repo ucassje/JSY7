@@ -73,7 +73,7 @@ M_s=1.989*10**(30)
 print((f_solar_r-i_solar_r)/U_f)
 print(((f_solar_r-i_solar_r)/U_f)/delt)
 
-Exp=0.5
+Exp=0#0.5
 
 
 updatetime=40
