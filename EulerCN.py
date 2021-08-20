@@ -58,7 +58,7 @@ Fvv=delt/(delv)**2
 Fz=delt/delz
 print(Fv)
 print(Fz)
-U_f=1000000./v_Ae_0
+U_f=400000./v_Ae_0
 T_e=10*10**5; #5*(10**(5))
 T_e_back=10*(10**(5));
 Bol_k=1.3807*(10**(-23));
@@ -73,7 +73,7 @@ M_s=1.989*10**(30)
 print((f_solar_r-i_solar_r)/U_f)
 print(((f_solar_r-i_solar_r)/U_f)/delt)
 
-Exp=0#0.5
+Exp=0.5
 
 
 updatetime=40
@@ -412,7 +412,7 @@ def dcos(x):
 
 
 def B(x):
-        return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
+        return B_0(i_solar_r)*(i_solar_r/x)**1*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
 
 def dlnB(x):
         return (np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
