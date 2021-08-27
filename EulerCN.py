@@ -412,7 +412,7 @@ def dcos(x):
 
 
 def B(x):
-        return B_0(i_solar_r)*(i_solar_r/x)**1*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
+        return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
 
 def dlnB(x):
         return (np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
