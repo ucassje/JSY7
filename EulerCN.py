@@ -18,7 +18,7 @@ from lmfit import Parameters, fit_report, minimize
 #from lmfit import Model
 import lmfit
 
-Nv=81 #velocity step number
+Nv=61 #velocity step number
 i_solar_r=5 #10
 f_solar_r=20 #30
 path_home="/Users/user/Desktop/JSY7/"
@@ -76,7 +76,7 @@ print(((f_solar_r-i_solar_r)/U_f)/delt)
 Exp=0.5
 
 
-updatetime=16
+updatetime=40
 timestep=25 #700
 
 #calculate Beta
@@ -1372,7 +1372,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for i in range(Nv):
-        solu2[i]=np.log10(f_1[(40)*Nv+i,r]/np.amax(f_1))
+        solu2[i]=np.log10(f_1[(30)*Nv+i,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(pal_v,solu2,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
@@ -1397,7 +1397,7 @@ for r in range(Nr):
 
 for r in range(Nr):
    for j in range(Nv):
-        solu4[j]=np.log10(f_1[(j)*Nv+40,r]/np.amax(f_1))
+        solu4[j]=np.log10(f_1[(j)*Nv+30,r]/np.amax(f_1))
    fig = plt.figure()
    fig.set_dpi(500)
    plt.plot(per_v,solu4,color='k',label=r'$r/r_s=$' "%.2f" % z[r]);
