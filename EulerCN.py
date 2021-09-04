@@ -91,7 +91,7 @@ def dU_solar(x):
         return U_f*(1./10.)*(2./(np.exp(x/10.)+np.exp(-x/10.)))**2
 
 def cos(r):
-        return (1/(1+((r-i_solar_r)*Omega/U_solar(r))**2)**0.5)
+        return (1/(1+((r-0*i_solar_r)*Omega/U_solar(r))**2)**0.5)
 
 def temperature(r):
         return T_e*(i_solar_r/r)**(0.8) #T_e*np.exp(-(r-i_solar_r)**2/600) #T_e*np.exp(2/(r-2.2)**0.7) #(0.1*T_e-T_e)/(f_solar_r-i_solar_r)*(r-i_solar_r)+T_e
@@ -408,11 +408,11 @@ def rect_v(x):
 	return 1#0 if abs(x)>=abs(pal_v[0]) else 1
 
 def dcos(x):
-        return -1/(1+(x*Omega/U_solar(x))**2)**1.5*(((Omega/U_solar(x))**2*(x-i_solar_r))-(x-i_solar_r)**2*(Omega**2/U_solar(x)**3)*dU_solar(x))
+        return -1/(1+(x*Omega/U_solar(x))**2)**1.5*(((Omega/U_solar(x))**2*(x-0*i_solar_r))-(x-0*i_solar_r)**2*(Omega**2/U_solar(x)**3)*dU_solar(x))
 
 
 def B(x):
-        return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
+        return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-0*i_solar_r)*Omega/U_solar(x))**2)**0.5
 
 def dlnB(x):
         return (np.log(B(x+delz))-np.log(B(x-delz)))/(2*delz)
