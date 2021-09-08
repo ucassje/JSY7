@@ -42,7 +42,7 @@ pal_v = np.linspace(-Mv, Mv, Nv)
 per_v = np.linspace(-Mv, Mv, Nv)
 delv=pal_v[1]-pal_v[0]
 print(delv)
-Nr=50      #radial step number
+Nr=60      #radial step number
 r_s=696340000.
 z=np.linspace(i_solar_r, f_solar_r, Nr)
 delz=z[1]-z[0]
@@ -82,7 +82,7 @@ def U_solar(r):
         return U_f*(np.exp(r/10.)-np.exp(-r/10.))/(np.exp(r/10.)+np.exp(-r/10.)) 
 
 def B(x):
-        return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-i_solar_r)*Omega/U_solar(x))**2)**0.5
+        return B_0(i_solar_r)*(i_solar_r/x)**2*(1+((x-0*i_solar_r)*Omega/U_solar(x))**2)**0.5
 
 def dU_solar(x):
         return U_f*(1./10.)*(2./(np.exp(x/10.)+np.exp(-x/10.)))**2
