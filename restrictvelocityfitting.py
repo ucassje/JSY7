@@ -147,7 +147,7 @@ for r in range(Nr):
    Density[r]=tempDensity/(r_s**3)
 
 for j in range(Nv):
-        if per_v[j]>12.9:
+        if per_v[j]>13:
             h=h+1
                 
 f_11=np.zeros(shape = (Nv*(Nv-2*h), 1))
@@ -190,7 +190,7 @@ for r in range(Nr):
     print(r)
     if r==0:
             p = lmfit.Parameters()
-            p.add_many(('nc', 0.7,True,0.7,1), ('Tc_pal', 10*10**5,True,1*10**5,10*10**5), ('Tc_per', 10*10**5,True,1*10**5,10*10**5), ('Ts_pal', 17*10**5,True,1*10**5,20*10**5), ('Ts_per', 17*10**5,True,1*10**5,20*10**5), ('Uc',0,True,-3.,0),('Us',0,True,0,0.5))
+            p.add_many(('nc', 0.7,True,0.7,1), ('Tc_pal', 10*10**5,True,1*10**5,10*10**5), ('Tc_per', 10*10**5,True,1*10**5,10*10**5), ('Ts_pal', 18*10**5,True,1*10**5,20*10**5), ('Ts_per', 18*10**5,True,1*10**5,20*10**5), ('Uc',0,True,-3.,0),('Us',0,True,0,0.5))
     else:                          
             p = lmfit.Parameters()
             p.add_many(('nc', nc[r-1],True,0.7,1), ('Tc_pal', Tc_pal[r-1],True,1*10**5,10*10**5), ('Tc_per', Tc_per[r-1],True,1*10**5,10*10**5), ('Ts_pal', Ts_pal[r-1],True,1*10**5,20*10**5), ('Ts_per', Ts_per[r-1],True,1*10**5,20*10**5), ('Uc',Uc[r-1],True,-3.,-0.),('Us',Us[r-1],True,0,17))
