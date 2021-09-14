@@ -147,7 +147,7 @@ for r in range(Nr):
    Density[r]=tempDensity/(r_s**3)
 
 for j in range(Nv):
-        if per_v[j]>12.8:
+        if per_v[j]>12.5:
             h=h+1
                 
 f_11=np.zeros(shape = (Nv*(Nv-2*h), 1))
