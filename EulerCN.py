@@ -277,9 +277,9 @@ def G_per_ee(a,b,x):
                 l=r
     d=0
     if (a**2+b**2)**0.5/v_th_function(Temperature_tol[l])<1 and abs(b)==0:
-        d=2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function(Temperature_tol[l])**5))#2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function(Temperature_tol[l])**3)-(4/15)*(b**2/v_th_function(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function(Temperature_tol[l])**5)+(2/5)*(b**2*(a**2+b**2)/v_th_function(Temperature_tol[l])**5)) #2*(r_s**3)*(n(r)*10**6)/(np.pi**0.5)*((2/(3*v_th_function(temperature(r))))-(2/15)*((a**2+b**2)/v_th_function(temperature(r))**3)+(1/10)*((a**2+b**2)**2/v_th_function(temperature(r))**5))
+        d=0.5*2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function(Temperature_tol[l])**5))#2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function(Temperature_tol[l])**3)-(4/15)*(b**2/v_th_function(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function(Temperature_tol[l])**5)+(2/5)*(b**2*(a**2+b**2)/v_th_function(Temperature_tol[l])**5)) #2*(r_s**3)*(n(r)*10**6)/(np.pi**0.5)*((2/(3*v_th_function(temperature(r))))-(2/15)*((a**2+b**2)/v_th_function(temperature(r))**3)+(1/10)*((a**2+b**2)**2/v_th_function(temperature(r))**5))
     elif (a**2+b**2)**0.5/v_th_function(Temperature_tol[l])>=1 and abs(b)==0:
-        d=(r_s**3)*(Density_next[l])*v_th_function(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])))#(r_s**3)*(Density_next[l])*v_th_function(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5-1.5*b**2/(a**2+b**2)**2.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])))+2*(r_s**3)*(Density_next[l])*b**2/(a**2+b**2)**1.5*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])) #(r_s**3)*(n(r)*10**6)*v_th_function(temperature(r))**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(temperature(r)))*np.exp(-(a**2+b**2)/v_th_function(temperature(r))**2)+(2*(a**2+b**2)/v_th_function(temperature(r))**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(temperature(r))))
+        d=0.5*(r_s**3)*(Density_next[l])*v_th_function(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])))#(r_s**3)*(Density_next[l])*v_th_function(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5-1.5*b**2/(a**2+b**2)**2.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])))+2*(r_s**3)*(Density_next[l])*b**2/(a**2+b**2)**1.5*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])) #(r_s**3)*(n(r)*10**6)*v_th_function(temperature(r))**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(temperature(r)))*np.exp(-(a**2+b**2)/v_th_function(temperature(r))**2)+(2*(a**2+b**2)/v_th_function(temperature(r))**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(temperature(r))))
     return d
 
 def G_pal_2e(a,b,x):
@@ -350,9 +350,9 @@ def G_per_pp(a,b,x):
                 l=r
     d=0
     if (a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])<1 and abs(b)==0:
-        d=2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function_p(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function_p(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(Temperature_tol[l])**5))#2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function_p(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function_p(Temperature_tol[l])**3)-(4/15)*(b**2/v_th_function_p(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(Temperature_tol[l])**5)+(2/5)*(b**2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**5)) #2*(r_s**3)*(n(r)*10**6)/(np.pi**0.5)*((2/(3*v_th_function_p(temperature(r))))-(2/15)*((a**2+b**2)/v_th_function_p(temperature(r))**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(temperature(r))**5))
+        d=0.5*2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function_p(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function_p(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(Temperature_tol[l])**5))#2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function_p(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function_p(Temperature_tol[l])**3)-(4/15)*(b**2/v_th_function_p(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(Temperature_tol[l])**5)+(2/5)*(b**2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**5)) #2*(r_s**3)*(n(r)*10**6)/(np.pi**0.5)*((2/(3*v_th_function_p(temperature(r))))-(2/15)*((a**2+b**2)/v_th_function_p(temperature(r))**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(temperature(r))**5))
     elif (a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])>=1 and abs(b)==0:
-        d=(r_s**3)*(Density_next[l])*v_th_function_p(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])))#(r_s**3)*(Density_next[l])*v_th_function_p(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5-1.5*b**2/(a**2+b**2)**2.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])))+2*(r_s**3)*(Density_next[l])*b**2/(a**2+b**2)**1.5*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])) #(r_s**3)*(n(r)*10**6)*v_th_function_p(temperature(r))**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(temperature(r)))*np.exp(-(a**2+b**2)/v_th_function_p(temperature(r))**2)+(2*(a**2+b**2)/v_th_function_p(temperature(r))**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(temperature(r))))
+        d=0.5*(r_s**3)*(Density_next[l])*v_th_function_p(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])))#(r_s**3)*(Density_next[l])*v_th_function_p(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5-1.5*b**2/(a**2+b**2)**2.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])))+2*(r_s**3)*(Density_next[l])*b**2/(a**2+b**2)**1.5*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])) #(r_s**3)*(n(r)*10**6)*v_th_function_p(temperature(r))**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(temperature(r)))*np.exp(-(a**2+b**2)/v_th_function_p(temperature(r))**2)+(2*(a**2+b**2)/v_th_function_p(temperature(r))**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(temperature(r))))
     return d
 
 
@@ -477,9 +477,9 @@ for r in range(Nr):
                         if per_v[j]<0:
                                 temp=temp
                         elif per_v[j]>0 and j!=0 and j!=Nv-1:
-                                temp=temp+2*np.pi*pal_v[i]*G_per_e(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                                temp=temp+2*np.pi*pal_v[i]*0.5*G_per_e(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                         elif per_v[j]==0 and j!=0 and j!=Nv-1 and j!=1 and j!=Nv-2:
-                                temp=temp+2*np.pi*pal_v[i]*0.5*G_per_ee(pal_v[i],per_v[j],z[r])*((f_1[(j+2)*Nv+i,r]-2*f_1[j*Nv+i,r]+f_1[(j-2)*Nv+i,r])/(4*delv**2))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                                temp=temp+2*np.pi*pal_v[i]*0.5*0.5*G_per_ee(pal_v[i],per_v[j],z[r])*((f_1[(j+2)*Nv+i,r]-2*f_1[j*Nv+i,r]+f_1[(j-2)*Nv+i,r])/(4*delv**2))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
         e_col_G4[r]=Col*temp
 
 
@@ -541,9 +541,9 @@ for r in range(Nr):
                         if per_v[j]<0:
                                 temp=temp
                         elif per_v[j]>0 and j!=0 and j!=Nv-1:
-                                temp=temp+2*np.pi*pal_v[i]*G_per_e(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                                temp=temp+2*np.pi*pal_v[i]*0.5*G_per_e(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                         elif per_v[j]==0 and j!=0 and j!=Nv-1 and j!=1 and j!=Nv-2:
-                                temp=temp+2*np.pi*pal_v[i]*0.5*G_per_ee(pal_v[i],per_v[j],z[r])*((f_1[(j+2)*Nv+i,r]-2*f_1[j*Nv+i,r]+f_1[(j-2)*Nv+i,r])/(4*delv**2))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                                temp=temp+2*np.pi*pal_v[i]*0.5*0.5*G_per_ee(pal_v[i],per_v[j],z[r])*((f_1[(j+2)*Nv+i,r]-2*f_1[j*Nv+i,r]+f_1[(j-2)*Nv+i,r])/(4*delv**2))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
         p_col_G4[r]=Col*temp
 
 
@@ -889,9 +889,9 @@ for p in range(updatetime):
                         l=r
             d=0
             if (a**2+b**2)**0.5/v_th_function(Temperature_tol[l])<1 and abs(b)==0:
-                d=2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function(Temperature_tol[l])**3)-(4/15)*(b**2/v_th_function(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function(Temperature_tol[l])**5)+(2/5)*(b**2*(a**2+b**2)/v_th_function(Temperature_tol[l])**5)) #2*(r_s**3)*(n(r)*10**6)/(np.pi**0.5)*((2/(3*v_th_function(temperature(r))))-(2/15)*((a**2+b**2)/v_th_function(temperature(r))**3)+(1/10)*((a**2+b**2)**2/v_th_function(temperature(r))**5))
+                d=0.5*2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function(Temperature_tol[l])**3)-(4/15)*(b**2/v_th_function(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function(Temperature_tol[l])**5)+(2/5)*(b**2*(a**2+b**2)/v_th_function(Temperature_tol[l])**5)) #2*(r_s**3)*(n(r)*10**6)/(np.pi**0.5)*((2/(3*v_th_function(temperature(r))))-(2/15)*((a**2+b**2)/v_th_function(temperature(r))**3)+(1/10)*((a**2+b**2)**2/v_th_function(temperature(r))**5))
             elif (a**2+b**2)**0.5/v_th_function(Temperature_tol[l])>=1 and abs(b)==0:
-                d=(r_s**3)*(Density_next[l])*v_th_function(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5-1.5*b**2/(a**2+b**2)**2.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])))+2*(r_s**3)*(Density_next[l])*b**2/(a**2+b**2)**1.5*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])) #(r_s**3)*(n(r)*10**6)*v_th_function(temperature(r))**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(temperature(r)))*np.exp(-(a**2+b**2)/v_th_function(temperature(r))**2)+(2*(a**2+b**2)/v_th_function(temperature(r))**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(temperature(r))))
+                d=0.5*(r_s**3)*(Density_next[l])*v_th_function(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5-1.5*b**2/(a**2+b**2)**2.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])))+2*(r_s**3)*(Density_next[l])*b**2/(a**2+b**2)**1.5*special.erf((a**2+b**2)**0.5/v_th_function(Temperature_tol[l])) #(r_s**3)*(n(r)*10**6)*v_th_function(temperature(r))**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function(temperature(r)))*np.exp(-(a**2+b**2)/v_th_function(temperature(r))**2)+(2*(a**2+b**2)/v_th_function(temperature(r))**2-1)*special.erf((a**2+b**2)**0.5/v_th_function(temperature(r))))
             return d
 
         def G_pal_2e(a,b,x):
@@ -962,9 +962,9 @@ for p in range(updatetime):
                         l=r
             d=0
             if (a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])<1 and abs(b)==0:
-                d=2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function_p(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function_p(Temperature_tol[l])**3)-(4/15)*(b**2/v_th_function_p(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(Temperature_tol[l])**5)+(2/5)*(b**2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**5)) #2*(r_s**3)*(n(r)*10**6)/(np.pi**0.5)*((2/(3*v_th_function_p(temperature(r))))-(2/15)*((a**2+b**2)/v_th_function_p(temperature(r))**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(temperature(r))**5))
+                d=0.5*2*(r_s**3)*(Density_next[l])/(np.pi**0.5)*((2/(3*v_th_function_p(Temperature_tol[l])))-(2/15)*((a**2+b**2)/v_th_function_p(Temperature_tol[l])**3)-(4/15)*(b**2/v_th_function_p(Temperature_tol[l])**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(Temperature_tol[l])**5)+(2/5)*(b**2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**5)) #2*(r_s**3)*(n(r)*10**6)/(np.pi**0.5)*((2/(3*v_th_function_p(temperature(r))))-(2/15)*((a**2+b**2)/v_th_function_p(temperature(r))**3)+(1/10)*((a**2+b**2)**2/v_th_function_p(temperature(r))**5))
             elif (a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])>=1 and abs(b)==0:
-                d=(r_s**3)*(Density_next[l])*v_th_function_p(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5-1.5*b**2/(a**2+b**2)**2.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])))+2*(r_s**3)*(Density_next[l])*b**2/(a**2+b**2)**1.5*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])) #(r_s**3)*(n(r)*10**6)*v_th_function_p(temperature(r))**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(temperature(r)))*np.exp(-(a**2+b**2)/v_th_function_p(temperature(r))**2)+(2*(a**2+b**2)/v_th_function_p(temperature(r))**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(temperature(r))))
+                d=0.5*(r_s**3)*(Density_next[l])*v_th_function_p(Temperature_tol[l])**2*(0.5/(a**2+b**2)**1.5-1.5*b**2/(a**2+b**2)**2.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l]))*np.exp(-(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2)+(2*(a**2+b**2)/v_th_function_p(Temperature_tol[l])**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])))+2*(r_s**3)*(Density_next[l])*b**2/(a**2+b**2)**1.5*special.erf((a**2+b**2)**0.5/v_th_function_p(Temperature_tol[l])) #(r_s**3)*(n(r)*10**6)*v_th_function_p(temperature(r))**2*(0.5/(a**2+b**2)**1.5)*((2/np.pi**0.5)*((a**2+b**2)**0.5/v_th_function_p(temperature(r)))*np.exp(-(a**2+b**2)/v_th_function_p(temperature(r))**2)+(2*(a**2+b**2)/v_th_function_p(temperature(r))**2-1)*special.erf((a**2+b**2)**0.5/v_th_function_p(temperature(r))))
             return d
 
 
@@ -1071,9 +1071,9 @@ for p in range(updatetime):
                               if per_v[j]<0:
                                       temp=temp
                               elif per_v[j]>0 and j!=0 and j!=Nv-1:
-                                      temp=temp+2*np.pi*pal_v[i]*G_per_e(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                                      temp=temp+2*np.pi*pal_v[i]*0.5*G_per_e(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                               elif per_v[j]==0 and j!=0 and j!=Nv-1 and j!=1 and j!=Nv-2:
-                                      temp=temp+2*np.pi*pal_v[i]*0.5*G_per_ee(pal_v[i],per_v[j],z[r])*((f_1[(j+2)*Nv+i,r]-2*f_1[j*Nv+i,r]+f_1[(j-2)*Nv+i,r])/(4*delv**2))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                                      temp=temp+2*np.pi*pal_v[i]*0.5*0.5*G_per_ee(pal_v[i],per_v[j],z[r])*((f_1[(j+2)*Nv+i,r]-2*f_1[j*Nv+i,r]+f_1[(j-2)*Nv+i,r])/(4*delv**2))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                e_col_G4[r]=Col*temp
 
 
@@ -1135,9 +1135,9 @@ for p in range(updatetime):
                               if per_v[j]<0:
                                       temp=temp
                               elif per_v[j]>0 and j!=0 and j!=Nv-1:
-                                      temp=temp+2*np.pi*pal_v[i]*G_per_e(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                                      temp=temp+2*np.pi*pal_v[i]*0.5*G_per_e(pal_v[i],per_v[j],z[r])*((f_1[(j+1)*Nv+i,r]-f_1[(j-1)*Nv+i,r])/(2*delv))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                               elif per_v[j]==0 and j!=0 and j!=Nv-1 and j!=1 and j!=Nv-2:
-                                      temp=temp+2*np.pi*pal_v[i]*0.5*G_per_ee(pal_v[i],per_v[j],z[r])*((f_1[(j+2)*Nv+i,r]-2*f_1[j*Nv+i,r]+f_1[(j-2)*Nv+i,r])/(4*delv**2))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
+                                      temp=temp+2*np.pi*pal_v[i]*0.5*0.5*G_per_ee(pal_v[i],per_v[j],z[r])*((f_1[(j+2)*Nv+i,r]-2*f_1[j*Nv+i,r]+f_1[(j-2)*Nv+i,r])/(4*delv**2))*abs(per_v[j])*(pal_v[1]-pal_v[0])**2
                p_col_G4[r]=Col*temp
 
 
