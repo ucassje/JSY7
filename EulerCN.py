@@ -70,8 +70,8 @@ time_nor=r_s/v_Ae_0
 Omega=2.7*10**(-6)*time_nor
 G=6.6726*10**(-11)
 M_s=1.989*10**(30)
-print((f_solar_r-i_solar_r)/U_f)
-print(((f_solar_r-i_solar_r)/U_f)/delt)
+#print((f_solar_r-i_solar_r)/U_f)
+#print(((f_solar_r-i_solar_r)/U_f)/delt)
 
 Exp=0.5
 
