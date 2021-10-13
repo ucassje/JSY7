@@ -58,7 +58,7 @@ Fvv=delt/(delv)**2
 Fz=delt/delz
 print(Fv)
 print(Fz)
-U_f=400000./v_Ae_0
+U_f=0#400000./v_Ae_0
 T_e=10*10**5; #5*(10**(5))
 T_e_back=10*(10**(5));
 Bol_k=1.3807*(10**(-23));
