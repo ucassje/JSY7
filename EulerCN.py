@@ -1284,23 +1284,23 @@ for p in range(updatetime):
                 
 
         
-                f_temp4=np.zeros(shape = (Nv**2, Nr))
-                f_temp4[:,:]=f_1[:,:]                                
-                for r in range(Nr-1):
-                            for j in range(Nv):
-                                    for i in range(Nv):
-                                            if i!=Nv-1 and i!=0 and j!=Nv-1 and j!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1]))                             
-                                            elif i==Nv-1 and j!=Nv-1 and j!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])) 
-                                            elif i==0 and j!=Nv-1 and j!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])) 
-                                            elif j==Nv-1 and i!=Nv-1 and i!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])+0.5*f_1[(j)*Nv+i+1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i+1,r+1])+0.5*f_1[(j)*Nv+i-1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i-1,r+1])) 
-                                            elif j==0 and i!=Nv-1 and i!=0:
-                                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j)*Nv+i+1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i+1,r+1])+0.5*f_1[(j)*Nv+i-1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i-1,r+1])) 
-                f_1[:,:]=f_temp4[:,:]
-                f_1[:,0]=f_initial[:,0]    
+                #f_temp4=np.zeros(shape = (Nv**2, Nr))
+                #f_temp4[:,:]=f_1[:,:]                                
+                #for r in range(Nr-1):
+                #            for j in range(Nv):
+                #                    for i in range(Nv):
+                #                            if i!=Nv-1 and i!=0 and j!=Nv-1 and j!=0:
+                #                                    f_temp4[j*Nv+i,r+1]=(1/4)*(2*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1]))                             
+                #                            elif i==Nv-1 and j!=Nv-1 and j!=0:
+                #                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i-1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i-1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])) 
+                #                            elif i==0 and j!=Nv-1 and j!=0:
+                #                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[j*Nv+i+1,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[j*Nv+i+1,r+1])+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])) 
+                #                            elif j==Nv-1 and i!=Nv-1 and i!=0:
+                #                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[(j-1)*Nv+i,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[(j-1)*Nv+i,r+1])+0.5*f_1[(j)*Nv+i+1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i+1,r+1])+0.5*f_1[(j)*Nv+i-1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i-1,r+1])) 
+                #                            elif j==0 and i!=Nv-1 and i!=0:
+                #                                    f_temp4[j*Nv+i,r+1]=(1/3)*((3/2)*f_1[j*Nv+i,r+1]+0.5*f_1[(j+1)*Nv+i,r+1]*(f_pre[j*Nv+i,r+1]/f_pre[(j+1)*Nv+i,r+1])+0.5*f_1[(j)*Nv+i+1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i+1,r+1])+0.5*f_1[(j)*Nv+i-1,r+1]*(f_pre[(j)*Nv+i,r+1]/f_pre[(j)*Nv+i-1,r+1])) 
+                #f_1[:,:]=f_temp4[:,:]
+                #f_1[:,0]=f_initial[:,0]    
 
                 
                 f_next[:,:]=f_1[:,:]
