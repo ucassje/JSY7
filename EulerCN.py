@@ -52,7 +52,7 @@ Mt=3600*v_Ae_0/r_s
 Nt=3600
 t=np.linspace(0, Mt, Nt)
 delt=(t[1]-t[0])            #time step
-
+print(delt)
 Fv=delt/delv
 Fvv=delt/(delv)**2
 Fz=delt/delz
@@ -70,8 +70,8 @@ time_nor=r_s/v_Ae_0
 Omega=2.7*10**(-6)*time_nor
 G=6.6726*10**(-11)
 M_s=1.989*10**(30)
-print((f_solar_r-i_solar_r)/U_f)
-print(((f_solar_r-i_solar_r)/U_f)/delt)
+#print((f_solar_r-i_solar_r)/U_f)
+#print(((f_solar_r-i_solar_r)/U_f)/delt)
 
 
 
